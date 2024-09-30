@@ -1,5 +1,3 @@
-// ./handle.js
-
 const url = require('url');
 const qs = require('querystring');
 

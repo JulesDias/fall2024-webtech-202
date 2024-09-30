@@ -1,5 +1,3 @@
-// ./index.js
-
 const http = require('http');
 const handles = require('./handle');
 

@@ -1,6 +1,6 @@
 # WEB TECH FALL 2024
 
-We will cover best practices when developing Node.js programs including API design, package definition, NPM interaction, test coverages and TypeScript. Each unit of the course is designed to complement each other in the building of a real-life application. We propose to build an API enabling to store and retrieve timeseries data with a complementary web UI. For example, the result could be used to collect system metrics from a cluster.
+Pour ce premier LAB nous avons appris à lancer un serveur sur le port 8080.
 
 ## Installation
 

@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "fall2024-webtech-202",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "develop": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jules Dias and Arthur Berret",
   "license": "ISC",
   "description": "",
   "dependencies": {

@@ -1,16 +1,17 @@
 {
   "name": "fall2024-webtech-202",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
-    "develop": "nodemon index.js"
+    "start": "node app.js",
+    "develop": "nodemon app.js"
   },
   "keywords": [],
   "author": "Jules Dias and Arthur Berret",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.21.0",
     "nodemon": "^3.1.7"
   }
 }

@@ -20,6 +20,8 @@ module.exports = {
       res.write('Hello anonymous');
     }
 
+    console.log('i am in handle');
     res.end();
+    
   }
 };

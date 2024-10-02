@@ -7,5 +7,6 @@ const db = require('./db');
 const server = http.createServer(handles.serverHandle);
 server.listen(8080, () => {
   console.log('Server is listening on port 8080');
+  console.log('i am in index');
 });
 

@@ -30,12 +30,15 @@ Suivez les étapes ci-dessous pour installer et démarrer le projet sur votre ma
 
 3. **Installez les dépendances :**
 
-   Une fois dans le répertoire du projet, exécutez la commande suivante pour installer toutes les dépendances nécessaires :
+   Une fois dans le répertoire du projet, exécutez les commandes suivantes pour installer toutes les dépendances nécessaires :
 
    ```bash
    npm install
    ```
-
+   ```bash
+   npm install express
+   ```
+   
 4. **Démarrez le projet :**
 
    Démarrez l'application en local avec la commande suivante :

@@ -5,7 +5,7 @@ Projet réalisé en cours de Technologie Web dans le but de créer une applicati
 ## Prérequis
 
 - [Node.js](https://nodejs.org/) version 12+ doit être installé sur votre machine.
-- [npm] 
+- [npm](https://www.npmjs.com/)
 - [Git](https://git-scm.com/) doit être installé pour cloner le dépôt.
 
 ## Étapes d'installation

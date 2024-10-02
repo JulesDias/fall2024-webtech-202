@@ -2,27 +2,25 @@
 
 Projet réalisé en cours de Technologie Web dans le but de créer une application.
 
-## Installation
-
-### Prérequis
+## Prérequis
 
 - [Node.js](https://nodejs.org/) version 12+ doit être installé sur votre machine.
 - [npm] 
 - [Git](https://git-scm.com/) doit être installé pour cloner le dépôt.
 
-### Étapes d'installation
+## Étapes d'installation
 
 1. Clonez le dépôt :
 
    ```bash
    git clone https://github.com/JulesDias/fall2024-webtech-202
 
-### Utilisation
+## Utilisation
 
 Serveur accessible à url:
 
 
-### Contributeurs du groupe 202
+## Contributeurs du groupe 202
 
 - Jules DIAS
 - Arthur BERRET

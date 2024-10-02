@@ -14,6 +14,13 @@ Projet réalisé en cours de Technologie Web dans le but de créer une applicati
 
    ```bash
    git clone https://github.com/JulesDias/fall2024-webtech-202
+   
+2. Installer les dépendances
+   ```bash
+   npm install
+   npm run start
+
+   
 
 ## Utilisation
 

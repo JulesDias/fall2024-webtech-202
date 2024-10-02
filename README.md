@@ -1,12 +1,13 @@
-# WEB TECH FALL 2024
+# WEB TECH FALL 2024 - 202
 
-Pour ce premier LAB nous avons appris à lancer un serveur sur le port 8080.
+Projet réalisé en cours de Technologie Web dans le but de créer une application.
 
 ## Installation
 
 ### Prérequis
 
 - [Node.js](https://nodejs.org/) version 12+ doit être installé sur votre machine.
+- [npm] 
 - [Git](https://git-scm.com/) doit être installé pour cloner le dépôt.
 
 ### Étapes d'installation
@@ -15,3 +16,13 @@ Pour ce premier LAB nous avons appris à lancer un serveur sur le port 8080.
 
    ```bash
    git clone https://github.com/JulesDias/fall2024-webtech-202
+
+### Utilisation
+
+Serveur accessible à url:
+
+
+### Contributeurs du groupe 202
+
+- Jules DIAS
+- Arthur BERRET

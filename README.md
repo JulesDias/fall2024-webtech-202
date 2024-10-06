@@ -38,6 +38,10 @@ Suivez les étapes ci-dessous pour installer et démarrer le projet sur votre ma
    ```bash
    npm install express
    ```
+
+   ```bash
+   npm install swagger-jsdoc swagger-ui-express
+   ```
    
 4. **Démarrez le projet :**
 
@@ -47,16 +51,20 @@ Suivez les étapes ci-dessous pour installer et démarrer le projet sur votre ma
    npm run start
    ```
 
-   Cela lancera un serveur de développement. Une fois le serveur démarré, accédez à l'application via l'URL affichée dans votre terminal (généralement `http://localhost:3000`).
+   Cela lancera un serveur de développement. Une fois le serveur démarré, accédez à l'application via l'URL affichée dans votre terminal (généralement `http://localhost:8080`).
 
 ## Utilisation
 
 Une fois le serveur démarré, vous pouvez accéder à l'application depuis votre navigateur à l'URL suivante :
 
 ```
-http://localhost:3000
+http://localhost:8080
 ```
+Pour accéder au swagger de l'application (test de requête), se rendre sur l'url :
 
+```
+http://localhost:8080/api-docs/
+```
 ## Contributeurs
 
 - Jules DIAS

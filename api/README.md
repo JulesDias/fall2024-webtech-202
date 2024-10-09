@@ -60,7 +60,7 @@ Une fois le serveur démarré, vous pouvez accéder à l'application depuis votr
 ```
 http://localhost:8080
 ```
-Pour accéder au swagger de l'application (test de requête), se rendre sur l'url :
+Pour accéder au swagger de l'application (test de requête), se rendre sur l'URL :
 
 ```
 http://localhost:8080/api-docs/

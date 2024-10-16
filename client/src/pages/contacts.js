@@ -1,6 +1,10 @@
-const Contacts = () => {
-    return <div>Contacts Page</div>;
-  };
-  
-  export default Contacts;
-  
+//Contacts page
+import Layout from '../components/Layout';
+
+export default function Contacts() {
+  return (
+    <Layout>
+      <h1>Contact Us!</h1>
+    </Layout>
+  );
+}

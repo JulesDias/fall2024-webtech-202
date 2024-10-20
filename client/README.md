@@ -1,5 +1,7 @@
 # WEB TECH FALL 2024 - Groupe 202
 
+## Partie  Client
+
 1. **Installation front**
 
 ```bash

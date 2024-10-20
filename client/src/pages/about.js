@@ -5,7 +5,7 @@ export default function About() {
   return (
     <Layout>   
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight font-roboto">
+          <h1 className="wt-title-better">
             Here's What We're About
           </h1>
           <p className="text-lg text-gray-200 mb-8 font-roboto">

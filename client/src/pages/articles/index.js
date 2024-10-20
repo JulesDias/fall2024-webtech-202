@@ -10,9 +10,9 @@ export default function Articles() {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center h-screen bg-gradient-to-b from-gray-100 to-black text-center">
+     
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight font-roboto">
+          <h1 className="wt-title-better">
             Articles
           </h1>
           <ul className="space-y-4">
@@ -25,7 +25,6 @@ export default function Articles() {
             ))}
           </ul>
         </div>
-      </div>
     </Layout>
   );
 }

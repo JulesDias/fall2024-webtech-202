@@ -1,11 +1,17 @@
-//About page
+// About page
 import Layout from '../components/Layout';
 
 export default function About() {
   return (
-    <Layout>
-      <h1>Here's whats about us : </h1>
-      <p>Lorem Ipsum dolor sit amet</p>
+    <Layout>   
+        <div className="max-w-2xl">
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight font-roboto">
+            Here's What We're About
+          </h1>
+          <p className="text-lg text-gray-200 mb-8 font-roboto">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
     </Layout>
   );
 }

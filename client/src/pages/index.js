@@ -1,5 +1,6 @@
 //home page
 import Layout from '../components/Layout';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -8,12 +9,16 @@ export default function Home() {
           <h1 className="wt-title-better">
             Welcome to the Blog
           </h1>
-          <p className="text-xl text-black-600 mb-8">
+          <p className="mb-8 text-xl text-black-600">
             Discover amazing articles and stories.
           </p>
-          <button className="px-8 py-3 bg-black text-white rounded-full text-lg hover:bg-gray-800 transition duration-300">
-            Explore Now
-          </button>
+          
+          <Link href="/articles" >
+            <button className="px-8 py-3 text-lg text-white transition duration-300 bg-black rounded-full hover:bg-gray-800">
+              Explore Now
+            </button>
+          </Link>
+          
         </div>
     </Layout>
   );

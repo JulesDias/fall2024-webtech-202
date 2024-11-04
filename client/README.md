@@ -2,6 +2,8 @@
 
 ## Partie  Client
 
+Dans cette partie nous allons développer toute la partie front de notre application
+
 1. **Installation front**
 
 To clean the warnings :

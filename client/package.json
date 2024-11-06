@@ -1,4 +1,9 @@
 {
+  "name": "fall2024-webtech-202",
+  "contributors": [
+    "Jules DIAS",
+    "Arthur BERRET"
+  ],
   "dependencies": {
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",

@@ -61,5 +61,5 @@ Ce projet est une application de publication numérique développée dans le cad
 
 ## Contributeurs
 
-- **Jules DIAS** -  [GitHub](https://github.com/julesdias)
-- **Arthur BERRET** -  [GitHub](https://github.com/Atlas002)
+- [**Jules DIAS**](https://github.com/julesdias)
+- [**Arthur BERRET**](https://github.com/Atlas002)

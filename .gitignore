@@ -3,4 +3,4 @@ api/node_modules/
 client/node_modules/
 client/.next/*
 client/next/
-Client/package-lock.json/
+Client/package-lock.json

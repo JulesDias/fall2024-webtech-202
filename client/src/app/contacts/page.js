@@ -1,9 +1,9 @@
 // Contacts page
-import Layout from '../components/Layout';
+
 
 export default function Contacts() {
   return (
-    <Layout>
+    
       
         <div className="max-w-2xl">
           <h1 className="wt-title-better">
@@ -34,6 +34,6 @@ export default function Contacts() {
           </form>
         </div>
 
-    </Layout>
+    
   );
 }

@@ -1,10 +1,10 @@
 //home page
-import Layout from '../components/Layout';
+
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <Layout>
+    
         <div className="text-center">
           <h1 className="wt-title-better">
             Welcome to the Blog
@@ -13,13 +13,13 @@ export default function Home() {
             Discover amazing articles and stories.
           </p>
           
-          <Link href="/articles" >
+          <Link href="/articles/" >
             <button className="px-8 py-3 text-lg text-white transition duration-300 bg-black rounded-full hover:bg-gray-800">
               Explore Now
             </button>
           </Link>
           
         </div>
-    </Layout>
+    
   );
 }

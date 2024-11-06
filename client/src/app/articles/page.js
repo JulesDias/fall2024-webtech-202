@@ -1,6 +1,7 @@
 // Articles page
 import Link from 'next/link';
-import Layout from '../../components/Layout';
+
+
 
 export default function Articles() {
   const articles = [
@@ -9,22 +10,19 @@ export default function Articles() {
   ];
 
   return (
-    <Layout>
-     
         <div className="max-w-2xl">
           <h1 className="wt-title-better">
             Articles
           </h1>
           <ul className="space-y-4">
             {articles.map((article) => (
-              <li key={article.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-                <Link href={`/articles/${article.id}`} className="text-lg text-black font-roboto hover:text-blue-500 transition">
+              <li key={article.id} className="p-4 transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg">
+                <Link href={`/articles/${article.id}`} className="text-lg text-black transition font-roboto hover:text-blue-500">
                   {article.title}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-    </Layout>
   );
 }

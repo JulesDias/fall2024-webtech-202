@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 .wt-title {
-    @apply text-3xl font-bold underline mb-10;
-  }
+  @apply text-3xl font-bold underline mb-10 text-gray-900 dark:text-gray-100;
+}
 
 .wt-title-better {
-    @apply text-5xl font-extrabold text-gray-900 mb-4 tracking-tight;
-  }
+  @apply text-5xl font-extrabold text-gray-900 dark:text-gray-100 mb-4 tracking-tight;
+}
+
+
+body {
+  @apply text-gray-900 dark:text-gray-100;
+}

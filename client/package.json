@@ -8,6 +8,7 @@
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "next": "^15.0.2",
+    "next-themes": "^0.4.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss-font-inter": "^3.1.0"

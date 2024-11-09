@@ -9,7 +9,7 @@ export default function Contacts() {
           <h1 className="wt-title-better">
             Contact Us!
           </h1>
-          <p className="text-lg text-gray-600 mb-8 font-roboto">
+          <p className="text-lg text-gray-900 mb-8 font-roboto dark:text-gray-200">
             We would love to hear from you! Please reach out with any questions, comments, or feedback you may have.
           </p>
           <form className="flex flex-col space-y-4">

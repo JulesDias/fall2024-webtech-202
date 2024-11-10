@@ -1,18 +1,28 @@
+// app/components/UserContext.js
 "use client";
-
-import React, { createContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (username) => setUser({ username });
-  const logout = () => setUser(null);
+  const login = (username) => {
+    setUser({ username });
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
 
   return (
     <UserContext.Provider value={{ user, login, logout }}>
       {children}
     </UserContext.Provider>
   );
-};
+}
+
+// Hook d'accès rapide au contexte
+export function useUser() {
+  return useContext(UserContext);
+}

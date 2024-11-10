@@ -1,13 +1,14 @@
 "use client";
+
 import { useState } from "react";
 
-export default function ControlledSignupPage() {
+export default function LoginControlledPage() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     confirmPassword: ""
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
 
   // Update formData state when input values change
@@ -17,7 +18,9 @@ export default function ControlledSignupPage() {
 
     // Check if passwords match when either password or confirmPassword changes
     if (name === "password" || name === "confirmPassword") {
-      setPasswordMatch(formData.password === value || name === "password" ? value === formData.confirmPassword : true);
+      setPasswordMatch(
+        formData.password === value || name === "password" ? value === formData.confirmPassword : true
+      );
     }
   };
 
@@ -52,31 +55,39 @@ export default function ControlledSignupPage() {
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <label htmlFor="password" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 pr-10 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-12 right-3 flex items-center justify-center text-gray-500 dark:text-gray-300"
+              aria-label="Toggle password visibility"
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
           </div>
-          <div className="mb-6">
+          <div className="mb-6 relative">
             <label htmlFor="confirmPassword" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Confirm Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="confirmPassword"
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 pr-10 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             {!passwordMatch && (

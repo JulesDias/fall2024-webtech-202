@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useUser } from "./UserContext";
+import SwitchDM from "./SwitchDM";
 
 export default function Header({ isDarkMode, toggleDarkMode }) {
   const { user, login, logout } = useUser();
@@ -31,9 +32,9 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
         </div>
 
         <div className="flex items-center space-x-6">
-          <button onClick={toggleDarkMode} className="p-2 bg-gray-200 rounded hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-400">
-            {isDarkMode ? "🌙" : "☀️"}
-          </button>
+          {/* Utilisation du toggle switch SwitchDM */}
+          <SwitchDM checked={isDarkMode} onChange={toggleDarkMode} />
+
           {user ? (
             <div className="flex items-center space-x-4">
               <span className="text-gray-700 dark:text-gray-300">Welcome, {user.username}</span>

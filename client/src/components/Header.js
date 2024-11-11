@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 bg-gray-100 shadow-md dark:bg-gray-800">
+    <header className="sticky top-0 z-10 bg-gray-100 shadow-md dark:bg-gray-800 font-FS_Sinclair">
       <nav className="container flex items-center justify-between p-4 mx-auto">
         <div className="flex space-x-4">
           <Link href="/" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">

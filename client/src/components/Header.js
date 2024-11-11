@@ -1,4 +1,3 @@
-// app/components/Header.js
 "use client";
 
 import Link from "next/link";
@@ -32,8 +31,9 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
         </div>
 
         <div className="flex items-center space-x-6">
-          {/* Utilisation du toggle switch SwitchDM */}
+          {/* Toggle dark mode using the passed prop */}
           <SwitchDM checked={isDarkMode} onChange={toggleDarkMode} />
+          
 
           {user ? (
             <div className="flex items-center space-x-4">

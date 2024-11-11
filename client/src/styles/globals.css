@@ -14,3 +14,13 @@
 body {
   @apply text-gray-900 dark:text-gray-100;
 }
+
+/* Hide vertical scrollbar but allow scrolling */
+.hide-scrollbar {
+  overflow-y: scroll; /* Allows scrolling */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}

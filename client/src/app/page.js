@@ -1,25 +1,90 @@
-//home page
+"use client";
 
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
-export default function Home() {
+export default function Home({ isDarkMode }) {
+
+  //var parallax
+  const ref = useRef();
+
+  //declaring both light and dark mode titles
+  const lightTitle = "/HD2_title_clear.png";
+  const darkTitle = "/HD2_title_dark.png";
+
+  //images displayed on the top of the scrollpage
+  const bgTop = "/background.png";
+  const frontTop = "/layerAvant.png";
+
+  //code to use screen width in code
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    // This will run only on the client side
+    setScreenWidth(window.screen.availWidth);  // Get the screen width when the component is mounted
+  }, []);
+ 
+
+
   return (
-    
-        <div className="text-center">
-          <h1 className="wt-title-better">
-            Welcome to the Blog
-          </h1>
-          <p className="mb-8 text-xl text-black-600">
-            Discover amazing articles and stories.
+    <div>
+      <Parallax pages={3.25} ref={ref} className='hide-scrollbar'>
+
+        {/*top background image  */}
+        <ParallaxLayer offset={0} factor={2} speed={0.25}>
+        <img src={bgTop} width={screenWidth}/>
+        </ParallaxLayer>
+
+        {/*top front layer*/}
+        <ParallaxLayer offset={1} factor={2} speed={0.40}>
+        <img src={frontTop} width={screenWidth}/>
+        </ParallaxLayer>
+
+        {/*title layer */}
+        <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex w-full justify-center mt-0 ">
+          <img src={lightTitle} width={screenWidth*3/4} />
+        </ParallaxLayer>
+
+        {/*flavor quote*/}
+        <ParallaxLayer offset={1} factor={0.5} speed={0.5}>
+          <p className="text-lg text-white dark:text-gray-300 text-center ">
+            <em>
+            "The Earth is the cradle of humanity, but mankind cannot stay in the cradle forever" - Tsiolkovsky
+            </em>
           </p>
-          
-          <Link href="/articles/" >
-            <button className="px-8 py-3 text-lg text-white transition duration-300 bg-black rounded-full hover:bg-gray-800">
-              Explore Now
+        </ParallaxLayer>
+
+        {/*description*/}
+        <ParallaxLayer offset={2.5} factor={1.5} className="text-center max-w-1/3 mx-auto " style={{backgroundColor: "#06070b"}}>
+        <h1 className="text-5xl font-extrabold text-white">
+            Helldivers : Freedom, Explosions, and Friendly Fire
+          </h1>
+          <br /><br />
+          <p className="text-lg text-gray-300" style={{margin: 20}}>
+            Helldivers is the ultimate "galactic democracy" simulator where the goal is simple: survive the endless onslaught of alien scum while spreading the love of freedom across the stars. You and your fellow Helldivers are the elite of the elite, armed with high-tech weapons, powerful gear, and the unwavering belief that nothing says "liberation" quite like blowing up everything in sight.
+            <br /><br />
+            This isn't your average stroll through the galaxy. Oh no, it's more like a chaotic dance of death where you can accidentally call in a bombing strike on your own squad, or launch yourself into orbit instead of the planet you meant to land on. It's a game where friendly fire is a real thing—so, remember, "Oops, my bad!" might just be the most frequently spoken phrase.
+            <br /><br />
+            You'll be diving into hostile planets, dodging alien swarms, and executing missions in a relentless grind for freedom. And hey, if you die (which, spoiler alert, you will), just respawn and get back in there. After all, the galaxy is at war, and democracy is a full-contact sport. So grab your gun, strap on your jetpack, and get ready to sacrifice your body for the greater good... or at least for the hilarious explosions along the way.
+            <br /><br />
+            Join the fight, Helldiver. The galaxy’s waiting—and it's probably already on fire.
+          </p>
+
+          <div className="relative mt-12 z-20">
+          <Link href="/articles/">
+            <button
+              role="button"
+              className="px-8 py-3 text-lg text-black bg-gray-200 rounded-full hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
+            >
+              Explore the galaxy 💫
             </button>
           </Link>
-          
         </div>
-    
+        </ParallaxLayer>
+
+      </Parallax>
+    </div>
   );
 }

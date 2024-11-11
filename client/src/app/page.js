@@ -3,15 +3,21 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { useDarkMode } from '../components/DarkmodeContext';
 
-export default function Home({ isDarkMode }) {
+export default function Home({}) {
 
   //var parallax
   const ref = useRef();
 
+  const { isDarkMode } = useDarkMode();
+
   //declaring both light and dark mode titles
   const lightTitle = "/HD2_title_clear.png";
   const darkTitle = "/HD2_title_dark.png";
+
+
+  const titleDiplayed = isDarkMode? darkTitle : lightTitle;
 
   //images displayed on the top of the scrollpage
   const bgTop = "/background.png";
@@ -43,7 +49,7 @@ export default function Home({ isDarkMode }) {
 
         {/*title layer */}
         <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex justify-center w-full mt-0 ">
-          <img src={lightTitle} width={screenWidth*3/4} />
+          <img src={titleDiplayed} width={screenWidth*3/4} />
         </ParallaxLayer>
 
         {/*flavor quote*/}

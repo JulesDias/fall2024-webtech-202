@@ -1,11 +1,14 @@
+// Header.js
 "use client";
 
 import Link from "next/link";
 import { useUser } from "./UserContext";
 import SwitchDM from "./SwitchDM";
+import { useDarkMode } from "./DarkmodeContext"; // Import the context hook
 
-export default function Header({ isDarkMode, toggleDarkMode }) {
+export default function Header() {
   const { user, login, logout } = useUser();
+  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Access dark mode context
 
   const handleLogin = () => {
     const username = prompt("Enter your username:");
@@ -31,9 +34,8 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
         </div>
 
         <div className="flex items-center space-x-6">
-          {/* Toggle dark mode using the passed prop */}
+          {/* Toggle dark mode using context */}
           <SwitchDM checked={isDarkMode} onChange={toggleDarkMode} />
-          
 
           {user ? (
             <div className="flex items-center space-x-4">

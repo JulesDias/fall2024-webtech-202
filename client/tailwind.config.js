@@ -7,7 +7,11 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'FS_Sinclair' : ['FS_SINCLAIR', 'sans-serif'],
+      }
+    },
   },
   plugins: [
     require('tailwindcss-font-inter'),

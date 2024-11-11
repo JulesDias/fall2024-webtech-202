@@ -24,3 +24,8 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
+
+@font-face {
+  font-family: 'FS_SINCLAIR';
+  src: url('/fonts/FS_Sinclair_Medium.otf');
+}

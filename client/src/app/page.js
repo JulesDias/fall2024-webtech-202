@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 export default function Home({ isDarkMode }) {
@@ -57,12 +56,12 @@ export default function Home({ isDarkMode }) {
         </ParallaxLayer>
 
         {/*description*/}
-        <ParallaxLayer offset={2.5} factor={1.5} className="mx-auto text-center max-w-1/3 " style={{backgroundColor: "#06070b"}}>
-        <h1 className="text-5xl font-extrabold text-white">
+        <ParallaxLayer offset={2.25} factor={1.5} className="mx-auto text-center max-w-1/3 " style={{backgroundColor: "#06070b"}}>
+        <h1 className="text-5xl  font-extrabold text-white font-FS_Sinclair">
             Helldivers : Freedom, Explosions, and Friendly Fire
           </h1>
           <br /><br />
-          <p className="text-lg text-gray-300" style={{margin: 20}}>
+          <p className="text-lg text-gray-300 font-FS_Sinclair" style={{margin: 20}}>
             Helldivers is the ultimate "galactic democracy" simulator where the goal is simple: survive the endless onslaught of alien scum while spreading the love of freedom across the stars. You and your fellow Helldivers are the elite of the elite, armed with high-tech weapons, powerful gear, and the unwavering belief that nothing says "liberation" quite like blowing up everything in sight.
             <br /><br />
             This isn't your average stroll through the galaxy. Oh no, it's more like a chaotic dance of death where you can accidentally call in a bombing strike on your own squad, or launch yourself into orbit instead of the planet you meant to land on. It's a game where friendly fire is a real thing—so, remember, "Oops, my bad!" might just be the most frequently spoken phrase.
@@ -76,7 +75,7 @@ export default function Home({ isDarkMode }) {
           <Link href="/articles/">
             <button
               role="button"
-              className="px-8 py-3 text-lg text-black bg-gray-200 rounded-full hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
+              className="font-FS_Sinclair px-8 py-3 text-lg text-black bg-gray-200 rounded-full hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
             >
               Explore the galaxy 💫
             </button>

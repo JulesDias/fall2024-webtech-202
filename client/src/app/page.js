@@ -33,23 +33,23 @@ export default function Home({ isDarkMode }) {
       <Parallax pages={3.25} ref={ref} className='hide-scrollbar'>
 
         {/*top background image  */}
-        <ParallaxLayer offset={0} factor={2} speed={0.25}>
-        <img src={bgTop} width={screenWidth}/>
+        <ParallaxLayer offset={0} factor={2} speed={0.25} className='w-screen'>
+        <img src={bgTop} style={{ width: '100%', height: 'auto'}}/>
         </ParallaxLayer>
 
         {/*top front layer*/}
-        <ParallaxLayer offset={1} factor={2} speed={0.40}>
-        <img src={frontTop} width={screenWidth}/>
+        <ParallaxLayer offset={1} factor={2} speed={0.40} className='w-screen'>
+        <img src={frontTop}  style={{ width: '100%', height: 'auto'}}/>
         </ParallaxLayer>
 
         {/*title layer */}
-        <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex w-full justify-center mt-0 ">
+        <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex justify-center w-full mt-0 ">
           <img src={lightTitle} width={screenWidth*3/4} />
         </ParallaxLayer>
 
         {/*flavor quote*/}
         <ParallaxLayer offset={1} factor={0.5} speed={0.5}>
-          <p className="text-lg text-white dark:text-gray-300 text-center ">
+          <p className="text-lg text-center text-white dark:text-gray-300 ">
             <em>
             "The Earth is the cradle of humanity, but mankind cannot stay in the cradle forever" - Tsiolkovsky
             </em>
@@ -57,7 +57,7 @@ export default function Home({ isDarkMode }) {
         </ParallaxLayer>
 
         {/*description*/}
-        <ParallaxLayer offset={2.5} factor={1.5} className="text-center max-w-1/3 mx-auto " style={{backgroundColor: "#06070b"}}>
+        <ParallaxLayer offset={2.5} factor={1.5} className="mx-auto text-center max-w-1/3 " style={{backgroundColor: "#06070b"}}>
         <h1 className="text-5xl font-extrabold text-white">
             Helldivers : Freedom, Explosions, and Friendly Fire
           </h1>
@@ -72,7 +72,7 @@ export default function Home({ isDarkMode }) {
             Join the fight, Helldiver. The galaxy’s waiting—and it's probably already on fire.
           </p>
 
-          <div className="relative mt-12 z-20">
+          <div className="relative z-20 mt-12">
           <Link href="/articles/">
             <button
               role="button"

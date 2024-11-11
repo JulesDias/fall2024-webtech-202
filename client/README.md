@@ -26,3 +26,7 @@ install the following extensions :
 ```bash
    npm install tailwindcss-font-inter @tailwindcss/typography @tailwindcss/forms
    ```
+
+```bash 
+   npm install @react-spring/parallax
+   ```

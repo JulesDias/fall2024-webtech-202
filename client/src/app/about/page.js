@@ -4,6 +4,8 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { useRef } from 'react';
 import React from "react";
+import { InfiniteMovingCards } from "../../components/ui/infinite-moving-cards";
+
 
 export default function About() {
 
@@ -45,7 +47,47 @@ export default function About() {
           </p>
         </ParallaxLayer>
 
+        <ParallaxLayer offset={1.5} factor={0.5}>
+          <div className="h-[40rem] rounded-md flex flex-col antialiased bg-grid-black/[0.05] dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden font-FS_Sinclair">
+          <InfiniteMovingCards
+            items={testimonials}
+            direction="right"
+            speed="slow"
+            />
+          </div>
+        </ParallaxLayer>
+
       </Parallax>
     </div>
   );
 }
+
+const testimonials = [
+  {
+    quote:
+      "I'm [redacted] and this is my favourite Hub",
+    name: "HelldiverFan0096",
+  },
+  {
+    quote:
+      "Review under investigation for treason",
+    name: "********",
+    title: "deleted",
+  },
+  {
+    quote: "Amazing Quality. I used this website for me and TWO of my kids. She loves them.",
+    name: "SweetSuperEarth001",
+  },
+  {
+    quote:
+      "I would like two baguettes please.. oh wait where am I ?",
+    name: "OldManOnInternet",
+    title: "grocery shopping list",
+  },
+  {
+    quote:
+      "My wife said it's Liberty Democratic Hub or her. She will be missed",
+    name: "xXNoPainNoGainXx",
+    title: "looking for understandable wife",
+  },
+];

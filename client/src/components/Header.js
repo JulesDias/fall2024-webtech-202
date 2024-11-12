@@ -23,7 +23,7 @@ export default function Header() {
       <nav className="container flex items-center justify-between p-4 mx-auto">
         <div className="flex space-x-4">
           <Link href="/" className={`px-4 py-2 transition hover:text-black dark:hover:text-white ${
-            pathname === '/' ? 'text-black dark:text-white border-b-2 border-black dark:border-gray-200' : 'text-gray-700 dark:text-gray-300'
+            pathname === '/' ? 'text-black dark:text-white border-b-2 border-black dark:border-gray-200 ' : 'text-gray-700 dark:text-gray-300'
           }`}>
             Home
           </Link>

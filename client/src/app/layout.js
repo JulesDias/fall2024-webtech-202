@@ -22,16 +22,17 @@ export default function RootLayout({ children }) {
 function DarkModeLayout({ children }) {
   const { isDarkMode } = useDarkMode(); // Access dark mode state
   const pathname = usePathname();
-  const isLandingPage = pathname === '/';
+  let isParallaxPage = (pathname === '/' || pathname === '/about')? true : false;
+  
 
   return (
 <html className={isDarkMode ? 'dark' : ''}>
-      <body className={isLandingPage ? 'overflow-hidden' : ''}>
+      <body className={isParallaxPage ? 'overflow-hidden' : ''}>
         <UserProvider>
           
             <div className="flex flex-col min-h-screen">
               <Header/>
-                <main className={isLandingPage ? 'flex-grow bg-gradient-to-b from-gray-100 to-gray-400 dark:from-gray-900 dark:to-gray-700 ' 
+                <main className={isParallaxPage ? 'flex-grow bg-gradient-to-b from-gray-100 to-gray-400 dark:from-gray-900 dark:to-gray-700 ' 
                   : 'flex items-center justify-center h-screen bg-gradient-to-b from-gray-100 to-gray-400 dark:from-gray-900 dark:to-gray-700'}>
                   {children}
                 </main>

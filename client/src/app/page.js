@@ -39,7 +39,7 @@ export default function Home({}) {
 
         {/*top background image  */}
         <ParallaxLayer offset={0} factor={2} speed={0.25} className='w-screen'>
-        <img src={bgTop} style={{ width: '100%', height: 'auto'}}/>
+        <img src={bgTop} style={{ width: '100%', height: 'auto'}}/> 
         </ParallaxLayer>
 
         {/*top front layer*/}
@@ -61,8 +61,11 @@ export default function Home({}) {
           </p>
         </ParallaxLayer>
 
+        {/*description background*/}
+        <ParallaxLayer offset={2.5} factor={1.5} style={{backgroundColor: "#06070b"}}/>
+
         {/*description*/}
-        <ParallaxLayer offset={2.25} factor={1.5} className="mx-auto text-center max-w-1/3 " style={{backgroundColor: "#06070b"}}>
+        <ParallaxLayer offset={2.25} factor={1.5} className="mx-auto text-center max-w-1/3 " >
         <h1 className="text-5xl  font-extrabold text-white font-FS_Sinclair">
             Helldivers : Freedom, Explosions, and Friendly Fire
           </h1>
@@ -88,6 +91,8 @@ export default function Home({}) {
           </Link>
         </div>
         </ParallaxLayer>
+
+
 
       </Parallax>
     </div>

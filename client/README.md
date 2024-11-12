@@ -21,6 +21,7 @@ install the following extensions :
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```  
+   
 2. **Tailwind CSS Plugins**
 
 ```bash

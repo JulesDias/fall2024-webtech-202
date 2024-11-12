@@ -17,7 +17,7 @@ export default function Home({}) {
   const darkTitle = "/HD2_title_dark.png";
 
 
-  const titleDiplayed = isDarkMode? darkTitle : lightTitle;
+  const titleDisplayed = isDarkMode? darkTitle : lightTitle;
 
   //images displayed on the top of the scrollpage
   const bgTop = "/background.png";
@@ -49,7 +49,7 @@ export default function Home({}) {
 
         {/*title layer */}
         <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex justify-center w-full mt-0 ">
-          <img src={titleDiplayed} width={screenWidth*3/4} />
+          <img src={titleDisplayed} width={screenWidth*3/4} />
         </ParallaxLayer>
 
         {/*flavor quote*/}
@@ -66,7 +66,7 @@ export default function Home({}) {
 
         {/*description*/}
         <ParallaxLayer offset={2.25} factor={1.5} className="mx-auto text-center max-w-1/3 " >
-        <h1 className="text-5xl  font-extrabold text-white font-FS_Sinclair">
+        <h1 className="text-5xl font-extrabold text-white font-FS_Sinclair">
             Helldivers : Freedom, Explosions, and Friendly Fire
           </h1>
           <br /><br />
@@ -84,7 +84,7 @@ export default function Home({}) {
           <Link href="/articles/">
             <button
               role="button"
-              className="font-FS_Sinclair px-8 py-3 text-lg text-black bg-gray-200 rounded-full hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
+              className="px-8 py-3 text-lg text-black bg-gray-200 rounded-full font-FS_Sinclair hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
             >
               Explore the galaxy 💫
             </button>

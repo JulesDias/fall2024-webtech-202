@@ -29,3 +29,21 @@ body {
   font-family: 'FS_SINCLAIR';
   src: url('/fonts/FS_Sinclair_Medium.otf');
 }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 400s linear infinite;
+}
+
+.bg-custom-yellow {
+  background-color: #ffe710;
+}
+
+.custom-yellow{
+  font-color: #ffe710;
+}

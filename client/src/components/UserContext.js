@@ -1,17 +1,43 @@
-// app/components/UserContext.js
+// components/UserContext.js
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
 
-export const UserContext = createContext();
+const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (username) => {
-    setUser({ username });
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+    };
+
+    getUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      authListener?.unsubscribe();
+    };
+  }, []);
+
+  const login = async (email, password) => {
+    const { error, data } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      console.error("Login error:", error.message);
+      return false;
+    }
+    setUser(data.user);
+    return true;
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) console.error("Logout error:", error.message);
     setUser(null);
   };
 
@@ -22,7 +48,4 @@ export function UserProvider({ children }) {
   );
 }
 
-// Hook d'accès rapide au contexte
-export function useUser() {
-  return useContext(UserContext);
-}
+export const useUser = () => useContext(UserContext);

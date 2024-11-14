@@ -30,3 +30,7 @@ install the following extensions :
 ```bash 
    npm install @react-spring/parallax
    ```
+
+```bash
+   npm install @supabase/supabase-js @supabase/auth-helpers-nextjs 
+   ```

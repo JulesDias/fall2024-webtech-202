@@ -5,15 +5,12 @@ import Link from "next/link";
 import { useUser } from "./UserContext";
 import SwitchDM from "./SwitchDM";
 import { useDarkMode } from "./DarkmodeContext"; // Import the context hook
+import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
+
 
 export default function Header() {
   const { user, login, logout } = useUser();
   const { isDarkMode, toggleDarkMode } = useDarkMode(); // Access dark mode context
-
-  const handleLogin = () => {
-    const username = prompt("Enter your username:");
-    if (username) login(username);
-  };
 
   return (
     <header className="sticky top-0 z-10 bg-gray-100 shadow-md dark:bg-gray-800 font-FS_Sinclair">
@@ -32,6 +29,10 @@ export default function Header() {
             Articles
           </Link>
         </div>
+        <div className="flex-1 max-w-prose mx-auto">
+        <NewsTicker />
+        </div>
+
 
         <div className="flex items-center space-x-6">
           {/* Toggle dark mode using context */}
@@ -39,15 +40,15 @@ export default function Header() {
 
           {user ? (
             <div className="flex items-center space-x-4">
-              <span className="text-gray-700 dark:text-gray-300">Welcome, {user.username}</span>
+              <span className="text-gray-700 dark:text-gray-300">Welcome, {user.email}</span>
               <button onClick={logout} className="px-4 py-2 bg-red-600 text-white rounded-md transition hover:bg-red-700 dark:bg-red-500">
                 Logout
               </button>
             </div>
           ) : (
-            <button onClick={handleLogin} className="px-4 py-2 bg-blue-600 text-white rounded-md transition hover:bg-blue-700 dark:bg-blue-500">
+            <Link href="/login_native" className="px-4 py-2 bg-blue-600 text-white rounded-md transition hover:bg-blue-700 dark:bg-blue-500">
               Login
-            </button>
+            </Link>
           )}
         </div>
       </nav>

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import { useDarkMode } from '../components/DarkmodeContext';
+import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
+
 
 export default function Home({}) {
 
@@ -38,7 +40,7 @@ export default function Home({}) {
       <Parallax pages={3.25} ref={ref} className='hide-scrollbar'>
 
         {/*top background image  */}
-        <ParallaxLayer offset={0} factor={2} speed={0.25} className='w-screen'>
+        <ParallaxLayer offset={0} factor={2} speed={0.15} className='w-screen'>
         <img src={bgTop} style={{ width: '100%', height: 'auto'}}/>
         </ParallaxLayer>
 

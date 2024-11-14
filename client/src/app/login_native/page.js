@@ -2,19 +2,34 @@
 
 import { useState } from "react";
 import { EvervaultCard } from "../../components/ui/evervault-card";
+import { useUser } from "../../components/UserContext"; // Import useUser pour utiliser la fonction login
 
 export default function LoginNativePage() {
   const [formData, setFormData] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (event) => {
+  const { login } = useUser(); // Récupère la fonction login depuis le contexte
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
+    setIsLoggingIn(true);
+
     const form = event.target;
     const data = new FormData(form);
-    const username = data.get("username");
+    const email = data.get("username");
     const password = data.get("password");
 
-    setFormData({ username, password });
+    const success = await login(email, password);
+    setIsLoggingIn(false);
+
+    if (!success) {
+      setError("Invalid credentials. Please try again.");
+    } else {
+      setFormData({ email, password });
+    }
   };
 
   return (
@@ -30,7 +45,7 @@ export default function LoginNativePage() {
           <input
             type="text"
             name="username"
-            placeholder="Username"
+            placeholder="Email"
             required
             className="w-full px-4 py-2 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 mb-4 font-FS_Sinclair"
           />
@@ -56,14 +71,19 @@ export default function LoginNativePage() {
           <button
             type="submit"
             className="w-full py-2 mt-6 text-white bg-gray-800 rounded-md hover:bg-gray-700 dark:bg-gray-600 font-FS_Sinclair"
+            disabled={isLoggingIn}
           >
-            Submit
+            {isLoggingIn ? "Logging in..." : "Submit"}
           </button>
+
+          {error && (
+            <p className="mt-4 text-red-500 dark:text-red-400">{error}</p>
+          )}
 
           {formData && (
             <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
               <p className="font-medium text-gray-900 dark:text-gray-300">Submitted Data:</p>
-              <p className="text-gray-700 dark:text-gray-400">Username: {formData.username}</p>
+              <p className="text-gray-700 dark:text-gray-400">Email: {formData.email}</p>
               <p className="text-gray-700 dark:text-gray-400">Password: {formData.password}</p>
             </div>
           )}

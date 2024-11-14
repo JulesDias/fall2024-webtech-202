@@ -1,5 +1,5 @@
 "use client";
-import { SignupFormDemo } from "./SignupFormDemo";
+import { SignupFormDemo } from "../../components/ui/SignupFormDemo";
 
 export default function MergedComponent() {
   return (

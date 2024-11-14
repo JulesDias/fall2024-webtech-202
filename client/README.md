@@ -34,3 +34,7 @@ install the following extensions :
 ```bash
    npm install @supabase/supabase-js @supabase/auth-helpers-nextjs 
    ```
+
+```bash
+   npm install three three-globe
+ ```

@@ -3,10 +3,9 @@
 
 import Link from "next/link";
 import { useUser } from "./UserContext";
-import SwitchDM from "./SwitchDM";
+import SwitchDM from "./ui/SwitchDM";
 import { useDarkMode } from "./DarkmodeContext"; // Import the context hook
 import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
-
 
 export default function Header() {
   const { user, login, logout } = useUser();
@@ -30,9 +29,8 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex-1 max-w-prose mx-auto">
-        <NewsTicker />
+          <NewsTicker />
         </div>
-
 
         <div className="flex items-center space-x-6">
           {/* Toggle dark mode using context */}
@@ -46,9 +44,14 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <Link href="/login_native" className="px-4 py-2 bg-blue-600 text-white rounded-md transition hover:bg-blue-700 dark:bg-blue-500">
-              Login
-            </Link>
+            <>
+              <Link href="/login_native" className="px-4 py-2 bg-blue-600 text-white rounded-md transition hover:bg-blue-700 dark:bg-blue-500">
+                Login
+              </Link>
+              <Link href="/login_controlled" className="px-4 py-2 bg-blue-600 text-white rounded-md transition hover:bg-blue-700 dark:bg-blue-500">
+                Sign Up
+              </Link>
+            </>
           )}
         </div>
       </nav>

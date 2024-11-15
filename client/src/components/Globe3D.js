@@ -1,20 +1,23 @@
 "use client";
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import ThreeGlobe from 'three-globe';
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import ThreeGlobe from "three-globe";
 
 // Import your data
-import countries from '../../public/globeData/custom.geo.json';
-import arcData from '../../public/globeData/arcData.json';
+import countries from "../../public/globeData/custom.geo.json";
+import arcData from "../../public/globeData/arcData.json";
 
 function Globe3D() {
   const canvasRef = useRef(null);
-  const rendererRef = useRef(null); // Prevent duplicate renderer creation on re-renders
+  const rendererRef = useRef(null); // Prevent duplicate renderer creation
+  const globeRef = useRef(null); // Persist globe instance
+  const sceneRef = useRef(null); // Persist scene instance
 
   useEffect(() => {
-    if (!canvasRef.current || rendererRef.current) return; // Prevent duplicate renderers
-
+    if (typeof window !== 'undefined') {
+    if (!canvasRef.current || rendererRef.current) return; // Prevent duplicate initialization
+    
     // Dimensions
     const width = canvasRef.current.clientWidth;
     const height = canvasRef.current.clientHeight;
@@ -23,10 +26,11 @@ function Globe3D() {
     const scene = new THREE.Scene();
     scene.background = null; // Transparent background
     scene.fog = new THREE.Fog(0x53ef3, 400, 2000);
+    sceneRef.current = scene; // Cache scene
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, width / height, 1, 2000);
-    camera.position.set(0, 0, 300);
+    camera.position.set(0, 0, 200); //og = 300
     scene.add(camera);
 
     // Renderer
@@ -34,7 +38,7 @@ function Globe3D() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     canvasRef.current.appendChild(renderer.domElement);
-    rendererRef.current = renderer; // Store renderer reference to prevent duplicates
+    rendererRef.current = renderer; // Store renderer reference
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xbbbbbb, 0.3);
@@ -64,45 +68,49 @@ function Globe3D() {
     controls.maxPolarAngle = Math.PI - Math.PI / 3;
 
     // Globe
-    const globe = new ThreeGlobe({ waitForGlobeReady: true, animateIn: true })
-      .hexPolygonsData(countries.features)
-      .hexPolygonResolution(3)
-      .hexPolygonMargin(0.5);
+    if (!globeRef.current) {
+      const globe = new ThreeGlobe({ waitForGlobeReady: true, animateIn: true })
+        .hexPolygonsData(countries.features)
+        .hexPolygonResolution(3)
+        .hexPolygonMargin(0.5);
 
-    // Adding arcs and rings to the globe
-    setTimeout(() => {
-      globe.arcsData(arcData.arcs)
-        .arcColor((e) => e.arcColor)
-        .arcAltitude((e) => e.arcAlt)
-        .arcStroke((e) => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
-        .arcDashLength(0.9)
-        .arcDashGap(4)
-        .arcDashAnimateTime(1000)
-        .arcsTransitionDuration(1000)
-        .arcDashInitialGap((e) => e.order * 1);
+      // Adding arcs and rings to the globe
+      setTimeout(() => {
+        globe.arcsData(arcData.arcs)
+          .arcColor((e) => e.arcColor)
+          .arcAltitude((e) => e.arcAlt)
+          .arcStroke((e) => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
+          .arcDashLength(0.9)
+          .arcDashGap(4)
+          .arcDashAnimateTime(1000)
+          .arcsTransitionDuration(1000)
+          .arcDashInitialGap((e) => e.order * 1);
 
-      const ringData = arcData.arcs.flatMap((arc) => [
-        { lat: arc.startLat, lng: arc.startLng, color: arc.arcColor },
-        { lat: arc.endLat, lng: arc.endLng, color: arc.arcColor },
-      ]);
+        const ringData = arcData.arcs.flatMap((arc) => [
+          { lat: arc.startLat, lng: arc.startLng, color: arc.arcColor },
+          { lat: arc.endLat, lng: arc.endLng, color: arc.arcColor },
+        ]);
 
-      globe.ringsData(ringData)
-        .ringColor((e) => () => e.color)
-        .ringMaxRadius(5)
-        .ringPropagationSpeed(3)
-        .ringRepeatPeriod(1000);
-    }, 0);
+        globe.ringsData(ringData)
+          .ringColor((e) => () => e.color)
+          .ringMaxRadius(5)
+          .ringPropagationSpeed(3)
+          .ringRepeatPeriod(1000);
+      }, 0);
 
-    globe.rotateY(-Math.PI * (5 / 9));
-    globe.rotateZ(-Math.PI / 6);
+      globe.rotateY(-Math.PI * (5 / 9));
+      globe.rotateZ(-Math.PI / 6);
 
-    // Globe material settings
-    const globeMaterial = globe.globeMaterial();
-    globeMaterial.color = new THREE.Color(0x3a228a);
-    globeMaterial.emissive = new THREE.Color(0x220038);
-    globeMaterial.emissiveIntensity = 0.1;
-    globeMaterial.shininess = 0.7;
-    scene.add(globe);
+      // Globe material settings
+      const globeMaterial = globe.globeMaterial();
+      globeMaterial.color = new THREE.Color(0x3a228a);
+      globeMaterial.emissive = new THREE.Color(0x220038);
+      globeMaterial.emissiveIntensity = 0.1;
+      globeMaterial.shininess = 0.7;
+      scene.add(globe);
+
+      globeRef.current = globe; // Cache globe instance
+    }
 
     // Animation loop
     const animate = () => {
@@ -120,15 +128,16 @@ function Globe3D() {
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup on unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       renderer.dispose();
-      rendererRef.current = null; // Reset reference on cleanup
+      rendererRef.current = null; // Reset renderer reference
     };
-  }, []); // Empty dependency array ensures this runs only once after mount
+  }
+  }, []); // Empty dependency array ensures this runs only once
 
   return <div ref={canvasRef} className="w-full h-full" />;
 }

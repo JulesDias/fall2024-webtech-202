@@ -1,6 +1,8 @@
 // Articles page
+"use client";
 import Link from 'next/link';
 import Globe3D from '../../components/Globe3D';
+import { motion } from 'framer-motion';
 
 export default function Articles() {
   const articles = [
@@ -13,16 +15,28 @@ export default function Articles() {
   return (
     <div className="grid w-full h-full min-h-screen grid-cols-8 gap-4 p-4 grid-rows-8">
       {/* Title in the top-left corner */}
-      <div className="flex items-center justify-center col-span-2 col-start-1 row-start-1" style={{ "marginRight": "-50%", "marginTop" : "-10%"}}>
-        <h1 className="text-5xl font-extrabold font-FS_Sinclair">Democratic Dispatches</h1>
+      <div 
+      className="flex items-center justify-center col-span-2 col-start-1 row-start-1" style={{ "marginRight": "-50%", "marginTop" : "-10%"}}>
+        <motion.h1 className="text-5xl font-extrabold font-FS_Sinclair"
+        initial = {{ y : -30, opacity: 0}}
+        animate = {{y: 0 , opacity: 1}}
+        transition={{duration : 1.5, delay : 0.25}}
+        >Democratic Dispatches</motion.h1>
       </div>
 
       <div className="flex items-center justify-center col-span-2 col-start-1 row-start-2 " style={{ "marginRight": "-50%", "marginTop": "25%", "marginLeft" : "10%"}}>
-        <p className="text-xl font-FS_Sinclair" style={{"textAlign" : "justify", "textJustify" : "inter-word"}}> <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b> <br/>
+        <motion.p 
+        className="text-xl font-FS_Sinclair" 
+        style={{"textAlign" : "justify", "textJustify" : "inter-word"}}
+        initial = {{ y : -20, opacity: 0}}
+        animate = {{y: 0 , opacity: 1}}
+        transition={{duration : 1.5, delay : 1}}
+        > <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b> <br/>
         Between liberty-spreading deployment, every Helldiver knows the galactic war effort continues at home, supporting morale by sharing their exploits! 
         Approved by Super Earth’s Ministry of Truth, these bites of democracy allows every super Citizen to relive every Helldiver's finest moments. <br/>
         <b>BROWSE</b> through the fearless feats of your comrades, <br/><b>SEARCH</b> for strategic brilliance,<br/> Or let the brass hand-pick the best in our <b>SUGGESTED POSTS!</b><br/>
-        Share your story. Strengthen the cause. Democracy needs <b>YOU!</b> </p>
+        Share your story. Strengthen the cause. Democracy needs <b>YOU!</b> 
+        </motion.p>
         
         
         

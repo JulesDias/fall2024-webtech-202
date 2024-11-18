@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import { useDarkMode } from '../components/DarkmodeContext';
 import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
-
+import { motion } from 'framer-motion';
 
 export default function Home({}) {
 
@@ -51,7 +51,13 @@ export default function Home({}) {
 
         {/*title layer */}
         <ParallaxLayer offset={0} factor={0.80} speed={1} className="flex justify-center w-full mt-0 ">
-          <img src={titleDiplayed} width={screenWidth*3/4} />
+          <motion.img 
+          src={titleDiplayed} 
+          width={screenWidth*3/4} 
+            initial = {{ y : -50, opacity : 0 }}
+            animate = {{ y : 0, opacity: 1}}
+            transition = {{delay: 0.2, duration : 1}}
+          />
         </ParallaxLayer>
 
         {/*flavor quote*/}
@@ -69,7 +75,7 @@ export default function Home({}) {
 
         {/*description*/}
         <ParallaxLayer offset={2.25} factor={1.5} className="mx-auto text-center max-w-1/3 " >
-        <h1 className="text-5xl  font-extrabold text-white font-FS_Sinclair">
+        <h1 className="text-5xl font-extrabold text-white font-FS_Sinclair">
             Helldivers : Freedom, Explosions, and Friendly Fire
           </h1>
           <br /><br />
@@ -87,7 +93,7 @@ export default function Home({}) {
           <Link href="/articles/">
             <button
               role="button"
-              className="font-FS_Sinclair px-8 py-3 text-lg text-black bg-gray-200 rounded-full hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
+              className="px-8 py-3 text-lg text-black bg-gray-200 rounded-full font-FS_Sinclair hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
             >
               Explore the galaxy 💫
             </button>

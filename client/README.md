@@ -38,3 +38,7 @@ install the following extensions :
 ```bash
    npm install three three-globe
  ```
+
+ ```bash
+   npm install motion
+ ```

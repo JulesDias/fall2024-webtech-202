@@ -2,7 +2,7 @@
 
 ## Partie  Client
 
-Dans cette partie nous allons développer toute la partie front de notre application
+In this part we will develop the entire front part of our application
 
 1. **Installation front**
 

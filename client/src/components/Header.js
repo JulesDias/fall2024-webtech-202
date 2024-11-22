@@ -8,7 +8,7 @@ import { useDarkMode } from "./DarkmodeContext"; // Import the context hook
 import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
 
 export default function Header() {
-  const { user, login, logout } = useUser();
+  const { user, logout } = useUser();
   const { isDarkMode, toggleDarkMode } = useDarkMode(); // Access dark mode context
 
   return (

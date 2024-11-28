@@ -27,7 +27,7 @@ export const EvervaultCard = ({
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
 
-    const str = generateRandomString(15000);
+    const str = generateRandomString(18000);
     setRandomString(str);
   }
 

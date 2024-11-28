@@ -1,51 +1,61 @@
 "use client";
+
 import { createContext, useContext, useState, useEffect } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // Charger l'utilisateur depuis le stockage local au démarrage
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser)); // Charger l'utilisateur stocké
-    }
+    // Récupère l'utilisateur actuel
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const { user_metadata } = session.user;
+        setUser({
+          ...session.user,
+          name: user_metadata?.name || session.user.email.split("@")[0], // Utilise le nom ou une partie de l'email comme fallback
+        });
+      } else {
+        setUser(null);
+      }
+    };
+
+    getUser();
+
+    // Écoute les changements de session
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        const { user_metadata } = session.user;
+        setUser({
+          ...session.user,
+          name: user_metadata?.name || session.user.email.split("@")[0],
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
 
-  // Fonction de connexion personnalisée
-  const login = async (email, password) => {
-    try {
-      // Requête à votre base de données pour vérifier les identifiants
-      const response = await fetch("../../app/api/login/route", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.message || "Erreur de connexion");
-      }
-
-      // Stocker l'utilisateur connecté dans le contexte et le localStorage
-      const { user } = result; // Supposons que l'API renvoie un objet utilisateur
-      setUser(user);
-      localStorage.setItem("user", JSON.stringify(user));
-      return true;
-    } catch (error) {
-      console.error("Login error:", error.message);
-      return false;
+  const login = async (provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    if (error) {
+      console.error("Erreur lors de la connexion :", error.message);
     }
   };
 
-  // Fonction de déconnexion
-  const logout = () => {
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Erreur lors de la déconnexion :", error.message);
+    }
     setUser(null);
-    localStorage.removeItem("user"); // Supprimer les données utilisateur du stockage local
   };
 
   return (
@@ -55,4 +65,6 @@ export function UserProvider({ children }) {
   );
 }
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => {
+  return useContext(UserContext);
+};

@@ -20,17 +20,17 @@ export default function NewsTicker() {
   }, []);
 
   return (
-    <div className="bg-gray-100 text-custom-yellow dark:bg-gray-800 dark:text-white py-2 overflow-hidden whitespace-nowrap font-FS_Sinclair">
-        <span className="animate-marquee">
-      {error ? (
-        <p className="text-center text-red-500">{error}</p>
-      ) : (
-        <div className="flex animate-marquee">
-          {[...news, ...news].map((message, index) => (  // Double le contenu pour l'illusion de continuité
-            <span key={index} className="mx-24">{message}</span> // Espace agrandi entre les messages
-          ))}
-        </div>
-      )}
+    <div className="text-black py-2 overflow-hidden whitespace-nowrap font-FS_Sinclair">
+      <span className="animate-marquee">
+        {error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : (
+          <div className="flex animate-marquee">
+            {[...news, ...news].map((message, index) => (  // Double le contenu pour l'illusion de continuité
+              <span key={index} className="mx-24">{message}</span> // Espace agrandi entre les messages
+            ))}
+          </div>
+        )}
       </span>
     </div>
   );

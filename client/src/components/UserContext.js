@@ -14,9 +14,12 @@ export function UserProvider({ children }) {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         const { user_metadata } = session.user;
+        // Si l'utilisateur est connecté via email, utilise la première partie de l'email comme nom
+        const name = user_metadata?.name || session.user.email.split("@")[0];
         setUser({
           ...session.user,
-          name: user_metadata?.name || session.user.email.split("@")[0], // Utilise le nom ou une partie de l'email comme fallback
+          name: name,
+          avatar_url: user_metadata?.avatar_url || "/BasicImage.png", // Photo de profil ou image par défaut
         });
       } else {
         setUser(null);
@@ -29,9 +32,11 @@ export function UserProvider({ children }) {
     const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         const { user_metadata } = session.user;
+        const name = user_metadata?.name || session.user.email.split("@")[0];
         setUser({
           ...session.user,
-          name: user_metadata?.name || session.user.email.split("@")[0],
+          name: name,
+          avatar_url: user_metadata?.avatar_url || "/BasicImage.png", // Photo de profil ou image par défaut
         });
       } else {
         setUser(null);

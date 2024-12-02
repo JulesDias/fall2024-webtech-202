@@ -4,12 +4,15 @@ import { useState } from "react";
 import { EvervaultCard } from "../../components/ui/evervault-card"; // Composant d'arrière-plan visuel
 import { supabase } from "../../lib/supabaseClient"; // Le client Supabase configuré
 import { IconBrandGithub, IconBrandDiscord } from "@tabler/icons-react";
+import { useRouter } from "next/navigation"; // Importer le hook useRouter
+
 
 export default function LoginNativePage() {
   const [showPassword, setShowPassword] = useState(false); // Contrôle la visibilité du mot de passe
   const [formData, setFormData] = useState({ email: "", password: "" }); // Données du formulaire
   const [error, setError] = useState(null); // Gestion des erreurs
   const [loading, setLoading] = useState(false); // Indicateur de chargement
+  const router = useRouter(); // Initialiser le router
 
   // Gestion des changements dans le formulaire
   const handleChange = (e) => {
@@ -28,6 +31,7 @@ export default function LoginNativePage() {
 
     const { email, password } = formData;
 
+
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -35,7 +39,8 @@ export default function LoginNativePage() {
       });
 
       if (error) throw error;
-      alert("Logged in successfully!");
+
+      router.push("/"); // Rediriger vers la page principale
     } catch (err) {
       setError(err.message);
     } finally {

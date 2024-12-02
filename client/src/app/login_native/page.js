@@ -77,7 +77,7 @@ export default function LoginNativePage() {
   return (
     <div className="flex items-center justify-center min-auto bg-gray-100 dark:bg-gray-900 rounded-3xl font">
       {/* Composant visuel pour l'effet d'arrière-plan */}
-      <EvervaultCard className="absolute inset-0 rounded-3xl z-0" />
+      <EvervaultCard className="absolute inset-0 rounded-3xl z-auto" />
 
       <div className="relative z-10 p-8 bg-white rounded-3xl shadow-md dark:bg-gray-800">
         {/* Formulaire de connexion */}

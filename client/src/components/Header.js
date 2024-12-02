@@ -11,6 +11,7 @@ export default function Header() {
   const { user, logout } = useUser(); // Utilisation du UserContext
   const { isDarkMode, toggleDarkMode } = useDarkMode(); // Utilisation du DarkmodeContext
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showNewsTicker, setShowNewsTicker] = useState(true); // Control visibility of NewsTicker
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
@@ -48,6 +49,14 @@ export default function Header() {
             {/* Toggle dark mode */}
             <SwitchDM checked={isDarkMode} onChange={toggleDarkMode} />
 
+            <span>Show News</span>
+            <input
+              type="checkbox"
+              checked={showNewsTicker}
+              onChange={() => setShowNewsTicker(!showNewsTicker)}
+              className="w-5 h-5 rounded-full text-blue-600 dark:bg-gray-600 focus:ring-blue-500"
+            />
+
             {user ? (
               <div className="relative">
                 {/* User profile picture */}
@@ -57,7 +66,7 @@ export default function Header() {
 
                 {/* Dropdown Menu */}
                 {menuOpen && (
-                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg dark:bg-gray-700 dark:border-gray-600">
+                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg z-auto dark:bg-gray-700 dark:border-gray-600">
                     <div className="block px-4 py-2 text-gray-700 dark:text-gray-300">
                       {user.name} {/* Affiche le nom de l'utilisateur */}
                     </div>
@@ -78,6 +87,7 @@ export default function Header() {
                     </button>
                   </div>
                 )}
+
               </div>
             ) : (
               <>
@@ -99,12 +109,17 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Banner with NewsTicker */}
-      <div className="w-full bg-cover bg-center" style={{ backgroundImage: "url('/HdBackgroundNewsTicker.png')" }}>
-        <div className="py-0">
-          <NewsTicker />
+      {showNewsTicker && (
+        <div
+          className="sticky top-[4rem] w-full bg-cover bg-center z-0"
+          style={{ backgroundImage: "url('/HdBackgroundNewsTicker.png')" }}
+        >
+          <div className="py-0 shadow-md dark:shadow-lg">
+            <NewsTicker />
+          </div>
         </div>
-      </div>
+      )}
+
     </>
   );
 }

@@ -1,106 +1,59 @@
+// Articles page
 "use client";
-import Link from "next/link";
-import Globe3D from "../../components/Globe3D";
-import { motion } from "framer-motion";
-import { ArticleCaroussel } from "../../components/ui/ArticleCaroussel";
+import Link from 'next/link';
+import Globe3D from '../../components/Globe3D';
+import { motion } from 'framer-motion';
 
 export default function Articles() {
   const articles = [
-    { id: 1, title: "First Article" },
-    { id: 2, title: "Second Article" },
+    { id: 1, title: 'First Article' },
+    { id: 2, title: 'Second Article' },
   ];
 
+
+  /*<div className="grid w-full h-full min-h-screen grid-cols-3 grid-rows-4 gap-4 p-4"> */
   return (
-    <div className="grid w-full h-full min-h-screen grid-cols-8 grid-rows-8 gap-4 p-4">
+    <div className="grid w-full h-full min-h-screen grid-cols-8 gap-4 p-4 grid-rows-8">
       {/* Title in the top-left corner */}
-      <div className="col-span-3 col-start-1 row-start-1 flex items-center" style={{"marginTop": "-5%"}}>
-        <motion.h1
-          className="text-4xl md:text-5xl font-extrabold font-FS_Sinclair"
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.25 }}
-        >
-          Democratic Dispatches
-        </motion.h1>
+      <div 
+      className="flex items-center justify-center col-span-2 col-start-1 row-start-1" style={{ "marginRight": "-50%", "marginTop" : "-10%"}}>
+        <motion.h1 className="text-5xl font-extrabold font-FS_Sinclair"
+        initial = {{ y : -30, opacity: 0}}
+        animate = {{y: 0 , opacity: 1}}
+        transition={{duration : 1.5, delay : 0.25}}
+        >Democratic Dispatches</motion.h1>
       </div>
 
-      {/* Flavor text in the middle-left */}
-      <div className="col-span-3 col-start-1 row-start-2 flex flex-col space-y-4" style={{"marginTop": "-5%"}}>
-        <motion.p
-          className="text-sm md:text-lg font-FS_Sinclair text-justify"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.25, delay: 1 }}
-        >
-          <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b>
+      <div className="flex items-center justify-center col-span-2 col-start-1 row-start-2 " style={{ "marginRight": "-50%", "marginTop": "25%", "marginLeft" : "10%"}}>
+        <motion.p 
+        className="text-xl font-FS_Sinclair" 
+        style={{"textAlign" : "justify", "textJustify" : "inter-word"}}
+        initial = {{ y : -20, opacity: 0}}
+        animate = {{y: 0 , opacity: 1}}
+        transition={{duration : 1.5, delay : 1}}
+        > <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b> <br/>
+        Between liberty-spreading deployment, every Helldiver knows the galactic war effort continues at home, supporting morale by sharing their exploits! 
+        Approved by Super Earth’s Ministry of Truth, these bites of democracy allows every super Citizen to relive every Helldiver's finest moments. <br/>
+        <b>BROWSE</b> through the fearless feats of your comrades, <br/><b>SEARCH</b> for strategic brilliance,<br/> Or let the brass hand-pick the best in our <b>SUGGESTED POSTS!</b><br/>
+        Share your story. Strengthen the cause. Democracy needs <b>YOU!</b> 
         </motion.p>
-        <motion.p
-          className="text-sm md:text-lg font-FS_Sinclair text-justify"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.25, delay: 1 }}
-        >
-          Between liberty-spreading deployment, every Helldiver knows the
-          galactic war effort continues at home, supporting morale by sharing
-          their exploits!
-        </motion.p>
-        <motion.p
-          className="text-sm md:text-lg font-FS_Sinclair text-justify"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.25, delay: 1 }}
-        >
-          Approved by Super Earth’s Ministry of Truth, these bites of democracy
-          allow every super Citizen to relive every Helldiver's finest moments.
-        </motion.p>
-        <motion.p
-          className="text-sm md:text-lg font-FS_Sinclair text-justify"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.25, delay: 1 }}
-        >
-          <b>BROWSE</b> through the fearless feats of your comrades,{" "}
-          <b>SEARCH</b> for strategic brilliance, or let the brass hand-pick
-          the best in our <b>SUGGESTED POSTS!</b>
-        </motion.p>
-        <motion.p
-          className="text-sm md:text-lg font-FS_Sinclair text-justify"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.25, delay: 1 }}
-        >
-          Share your story. Strengthen the cause. Democracy needs <b>YOU!</b>
-        </motion.p>
+        
+        
+        
       </div>
 
-      {/* Globe in the lower-left corner */}
-      <div className="col-span-3 col-start-1 row-start-5 relative" style={{"marginTop" : "5%"}}>
-        <div className="w-full h-[30vh] md:w-[50vw] md:h-[50vh]">
-          <Globe3D />
-        </div>
-      </div>
-
-      {/* Search bar at the top middle-right */}
-      <div className="col-span-4 col-start-5 row-start-1 flex items-center justify-end">
+      {/* Search bar at the top-right */}
+      <div className="flex items-center justify-end col-span-4 col-start-4 row-start-1">
         <input
           type="text"
           placeholder="Search articles..."
-          className="w-full md:w-2/3 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-FS_Sinclair"
+          className="w-2/3 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-FS_Sinclair"
         />
       </div>
 
-      {/* Article buttons in the lower middle-right */}
-      <div className="col-span-3 col-start-5 row-start-4 flex flex-col items-end space-y-4">
-              <ArticleCaroussel/>
-      </div>
-
-    </div>
-  );
-}
-
-
-/*
-        <ul className="w-full md:w-2/3">
+      {/* Article links in the middle-center-right */}
+      <div className="flex justify-end col-span-3 col-start-4 row-span-4 row-start-3 pr-8">
+        <ul className="w-1/2 space-y-4">
           {articles.map((article) => (
             <li
               key={article.id}
@@ -115,6 +68,12 @@ export default function Articles() {
             </li>
           ))}
         </ul>
+      </div>
 
-
-*/
+      {/* Optional Globe3D element */}
+      <div className="absolute w-[50vw] h-[50vh] overflow-hidden" style={{ right: '55%', top: '50%' }}>
+        <Globe3D />
+      </div>
+    </div>
+  );
+}

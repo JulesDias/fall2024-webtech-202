@@ -30,7 +30,6 @@ module.exports = {
   plugins: [
     require('tailwindcss-font-inter'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
     addVariablesForColors,  // Ajout de la fonction personnalisée
   ],

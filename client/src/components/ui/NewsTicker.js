@@ -26,7 +26,7 @@ export default function NewsTicker() {
           <p className="text-center text-red-500">{error}</p>
         ) : (
           <div className="flex animate-marquee">
-            {[...news, ...news].map((message, index) => (  // Double le contenu pour l'illusion de continuité
+            {[...news, ...news, ...news].map((message, index) => (  // triple le contenu pour l'illusion de continuité
               <span key={index} className="mx-24">{message}</span> // Espace agrandi entre les messages
             ))}
           </div>

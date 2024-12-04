@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import { useDarkMode } from '../components/DarkmodeContext';
-import NewsTicker from '../components/ui/NewsTicker'; // Import du composant
 import { motion } from 'framer-motion';
 
 export default function Home({ }) {

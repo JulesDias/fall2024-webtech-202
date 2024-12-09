@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 bg-gray-100 shadow-md dark:bg-gray-800 font-FS_Sinclair">
+      <header className="sticky top-0 z-20 bg-gray-100 shadow-md dark:bg-gray-800 font-FS_Sinclair">
         <nav className="flex items-center justify-between w-full p-4">
           {/* Navigation Links */}
           <div className="flex space-x-4">
@@ -107,18 +107,14 @@ export default function Header() {
             )}
           </div>
         </nav>
-      </header>
-
-      {showNewsTicker && (
+        {/* Bandeau d'information */}
         <div
-          className="sticky top-[4rem] w-full bg-cover bg-center z-0"
+          className="w-full bg-cover bg-center text-center text-white py-0"
           style={{ backgroundImage: "url('/HdBackgroundNewsTicker.png')" }}
         >
-          <div className="py-0 shadow-md dark:shadow-lg">
-            <NewsTicker />
-          </div>
+          <NewsTicker />
         </div>
-      )}
+      </header>
 
     </>
   );

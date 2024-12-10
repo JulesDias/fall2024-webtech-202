@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
 function DarkModeLayout({ children }) {
   const { isDarkMode } = useDarkMode(); // Access dark mode state
   const pathname = usePathname();
-  let isParallaxPage = (pathname === '/' || pathname === '/about') ? true : false;
+  let isParallaxPage = (pathname === '/' || pathname === '/about' ) ? true : false;
 
 
   return (

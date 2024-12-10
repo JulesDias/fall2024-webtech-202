@@ -5,14 +5,13 @@
 
 ## Deliverables 
 
-- Vercel URL: *place your URL*
-- Supabase project URL: *place your URL*
+- Vercel URL: [*place your URL*](https://fall2024-webtech-2022.vercel.app/)
+- Supabase project URL: [*place your URL*](https://supabase.com/dashboard/project/pjlmkvoqhyhisjduyqvl)
 
 ## Authors
 
-- *Firstname LASTNAME, group*
-- *Firstname LASTNAME, group*
-- *Firstname LASTNAME, group*
+- *Jules DIAS, Cyber groupe 2*
+- *Arthur BERRET, Cyber groupe 2*
 
 ## Evaluation
 

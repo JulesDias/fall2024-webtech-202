@@ -66,7 +66,7 @@ export default function Header() {
 
                 {/* Dropdown Menu */}
                 {menuOpen && (
-                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg z-auto dark:bg-gray-700 dark:border-gray-600">
+                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg z-20 dark:bg-gray-700 dark:border-gray-600">
                     <div className="block px-4 py-2 text-gray-700 dark:text-gray-300">
                       {user.name} {/* Affiche le nom de l'utilisateur */}
                     </div>
@@ -108,14 +108,15 @@ export default function Header() {
           </div>
         </nav>
         {/* Bandeau d'information */}
-        <div
-          className="w-full bg-cover bg-center text-center text-white py-0"
-          style={{ backgroundImage: "url('/HdBackgroundNewsTicker.png')" }}
-        >
-          <NewsTicker />
-        </div>
+        {showNewsTicker && (
+          <div
+            className="w-full bg-cover bg-center text-center text-white py-0"
+            style={{ backgroundImage: "url('/HdBackgroundNewsTicker.png')" }}
+          >
+            <NewsTicker />
+          </div>
+        )}
       </header>
-
     </>
   );
 }

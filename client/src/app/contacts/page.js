@@ -3,7 +3,7 @@
 import { useUser } from "../../components/UserContext";
 
 export default function Contacts() {
-  const { user, login, logout } = useUser();
+  const { user, login } = useUser();
 
   return (
     <div className="flex items-center justify-center min-h-screen font-FS_Sinclair">
@@ -90,7 +90,7 @@ export default function Contacts() {
               Log In with Discord
             </button>
             <button
-              onClick={() => login("email")}
+              onClick={() => window.location.href = "/login_native"}
               className="px-6 py-3 bg-gray-200 text-gray-900 font-bold rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 focus:outline-none transition duration-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
             >
               Log In with Email

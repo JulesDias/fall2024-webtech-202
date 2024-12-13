@@ -33,15 +33,19 @@ export default function Header() {
             <Link href="/" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
               Home
             </Link>
+            <Link href="/articles" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
+              Articles
+            </Link>
             <Link href="/about" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
               About
             </Link>
             <Link href="/contacts" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
               Contacts
             </Link>
-            <Link href="/articles" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
-              Articles
+            <Link href="/train" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
+              Training
             </Link>
+
           </div>
 
           {/* Right Side: Dark Mode Toggle & Profile */}

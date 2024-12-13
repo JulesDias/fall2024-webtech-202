@@ -1,0 +1,664 @@
+[
+    {
+        "name": "LIFT-850 Jump Pack",
+        "sequence": [
+            "↓",
+            "↑",
+            "↑",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Jump_Pack_Stratagem_Icon.png"
+    },
+    {
+        "name": "B-1 Supply Pack",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↑",
+            "↑",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Supply_Pack_Stratagem_Icon.png"
+    },
+    {
+        "name": "AX/LAS-5 Guard Dog Rover",
+        "sequence": [
+            "↓",
+            "↑",
+            "←",
+            "↑",
+            "→",
+            "→"
+        ],
+        "image": "../StratagemIcons/Guard_Dog_rover_Stratagem_Icon.png"
+    },
+    {
+        "name": "SH-20 Ballistic Shield Backpack",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↓",
+            "↑",
+            "←"
+        ],
+        "image": "../StratagemIcons/Ballistic_Shield_Backpack_Stratagem_Icon.png"
+    },
+    {
+        "name": "AX/AR-23 Guard Dog",
+        "sequence": [
+            "↓",
+            "↑",
+            "←",
+            "↑",
+            "→",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Guard_Dog_Stratagem_Icon.png"
+    },
+    {
+        "name": "MG-43 Machine Gun",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Machine_Gun_Stratagem_Icon.png"
+    },
+    {
+        "name": "APW-1 Anti-Material Rifle",
+        "sequence": [
+            "↓",
+            "←",
+            "→",
+            "↑",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Anti-Materiel_Rifle_Stratagem_Icon.png"
+    },
+    {
+        "name": "M-105 Stalwart",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↑",
+            "↑",
+            "←"
+        ],
+        "image": "../StratagemIcons/Stalwart_Stratagem_Icon.png"
+    },
+    {
+        "name": "EAST-17 Expendable Anti-Tank",
+        "sequence": [
+            "↓",
+            "↓",
+            "←",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Expendable_Anti-Tank_Stratagem_Icon.png"
+    },
+    {
+        "name": "GR-8 Recoiless Rifle",
+        "sequence": [
+            "↓",
+            "←",
+            "→",
+            "→",
+            "←"
+        ],
+        "image": "../StratagemIcons/Recoilless_Rifle_Stratagem_Icon.png"
+    },
+    {
+        "name": "FLAM-40 Flamethrower",
+        "sequence": [
+            "↓",
+            "←",
+            "↑",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Flamethrower_Stratagem_Icon.png"
+    },
+    {
+        "name": "AC-8 Autocannon",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↑",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Autocannon_Stratagem_Icon.png"
+    },
+    {
+        "name": "MG-206 Heavy Machine Gun",
+        "sequence": [
+            "↓",
+            "←",
+            "↑",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Heavy_Machine_Gun_Stratagem_Icon.png"
+    },
+    {
+        "name": "RS-422 Railgun",
+        "sequence": [
+            "↓",
+            "→",
+            "←",
+            "↓",
+            "↑",
+            "←",
+            "→"
+        ],
+        "image": "../StratagemIcons/Railgun_Stratagem_Icon.png"
+    },
+    {
+        "name": "FAF-14 Spear Launcher",
+        "sequence": [
+            "↓",
+            "↓",
+            "↑",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Spear_Stratagem_Icon.png"
+    },
+    {
+        "name": "GL-21 Grenade Launcher",
+        "sequence": [
+            "↓",
+            "←",
+            "↑",
+            "←",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Grenade_Launcher_Stratagem_Icon.png"
+    },
+    {
+        "name": "LAS-98 Laser Cannon",
+        "sequence": [
+            "↓",
+            "←",
+            "↓",
+            "↑",
+            "←"
+        ],
+        "image": "../StratagemIcons/Laser_Cannon_Stratagem_Icon.png"
+    },
+    {
+        "name": "ARC-3 Arc Thrower",
+        "sequence": [
+            "↓",
+            "→",
+            "↓",
+            "↑",
+            "←",
+            "←"
+        ],
+        "image": "../StratagemIcons/Arc_Thrower_Stratagem_Icon.png"
+    },
+    {
+        "name": "LAS-99 Quasar Cannon",
+        "sequence": [
+            "↓",
+            "↓",
+            "↑",
+            "←",
+            "→"
+        ],
+        "image": "../StratagemIcons/Quasar_Cannon_Stratagem_Icon.png"
+    },
+    {
+        "name": "EXO-45 Patriot Exosuit",
+        "sequence": [
+            "←",
+            "↓",
+            "→",
+            "↑",
+            "←",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/EXO-45_Patriot_Exosuit_Stratagem_Icon.png"
+    },
+    {
+        "name": "Reinforce",
+        "sequence": [
+            "↑",
+            "↓",
+            "→",
+            "←",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Reinforce_Stratagem_Icon.png"
+    },
+    {
+        "name": "SOS Beacon",
+        "sequence": [
+            "↑",
+            "↓",
+            "→",
+            "←"
+        ],
+        "image": "../StratagemIcons/SOS_Beacon_Stratagem_Icon.png"
+    },
+    {
+        "name": "Resupply",
+        "sequence": [
+            "↓",
+            "↓",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Resupply_Stratagem_Icon.png"
+    },
+    {
+        "name": "NUX-223 Hellbomb",
+        "sequence": [
+            "↓",
+            "↑",
+            "←",
+            "↓",
+            "↑",
+            "→",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Hellbomb_Stratagem_Icon.png"
+    },
+    {
+        "name": "SSSD Delivery",
+        "sequence": [
+            "↓",
+            "↓",
+            "↓",
+            "↑",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Start_Upload_Stratagem_Icon.svg"
+    },
+    {
+        "name": "Seismic Probe",
+        "sequence": [
+            "↑",
+            "↑",
+            "←",
+            "→",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Seismic_Probe_Stratagem_Icon.png"
+    },
+    {
+        "name": "Upload Data",
+        "sequence": [
+            "←",
+            "→",
+            "↑",
+            "↑",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Start_Upload_Stratagem_Icon.svg"
+    },
+    {
+        "name": "Eagle Re-arm",
+        "sequence": [
+            "↑",
+            "↑",
+            "←",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Eagle_Rearm_Stratagem_Icon.png"
+    },
+    {
+        "name": "Illumination Flare",
+        "sequence": [
+            "→",
+            "→",
+            "←",
+            "←"
+        ],
+        "image": "../StratagemIcons/Orbital_Illumination_Flare_Stratagem_Icon.png"
+    },
+    {
+        "name": "SEAF Artillery",
+        "sequence": [
+            "→",
+            "↑",
+            "↑",
+            "↓"
+        ],
+        "image": "../StratagemIcons/SEAF_Artillery_Stratagem_Icon.png"
+    },
+    {
+        "name": "Super Earth Flag",
+        "sequence": [
+            "↓",
+            "↑",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Super_Earth_Flag_Stratagem_Icon.png"
+    },
+    {
+        "name": "E/MG-101HMG Emplacement",
+        "sequence": [
+            "↓",
+            "↑",
+            "←",
+            "→",
+            "→",
+            "←"
+        ],
+        "image": "../StratagemIcons/HMG_Emplacement_Stratagem_Icon.png"
+    },
+    {
+        "name": "FX-12 Shield Generator Relay",
+        "sequence": [
+            "↓",
+            "↓",
+            "←",
+            "→",
+            "←",
+            "→"
+        ],
+        "image": "../StratagemIcons/Shield_Generator_Relay_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/ARC-3 Tesla Tower",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "↑",
+            "←",
+            "→"
+        ],
+        "image": "../StratagemIcons/Tesla_Tower_Stratagem_Icon.png"
+    },
+    {
+        "name": "MD-6 Anti-Personnel Minefield",
+        "sequence": [
+            "↓",
+            "←",
+            "↑",
+            "→"
+        ],
+        "image": "../StratagemIcons/Anti-Personnel_Minefield_Stratagem_Icon.png"
+    },
+    {
+        "name": "MD-14 Incendiary Mines",
+        "sequence": [
+            "↓",
+            "←",
+            "←",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Incendiary_Minefield_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/MG-43 Machine Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "→",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Machine_Gun_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/G-16 Gatling Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "←"
+        ],
+        "image": "../StratagemIcons/Gatling_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/M-12 Mortar Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "→",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Mortar_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/AC-8 Autocannon Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "↑",
+            "←",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Autocannon_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/MLS-4X Rocket Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "→",
+            "←"
+        ],
+        "image": "../StratagemIcons/Rocket_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "A/M-23 EMS Sentry",
+        "sequence": [
+            "↓",
+            "↑",
+            "→",
+            "↓",
+            "→"
+        ],
+        "image": "../StratagemIcons/AM-23_EMS_Mortar_Sentry_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Gatling Barrage",
+        "sequence": [
+            "→",
+            "↓",
+            "←",
+            "↑",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Orbital_Gatling_Barrage_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Airburst Strike",
+        "sequence": [
+            "→",
+            "→",
+            "→"
+        ],
+        "image": "../StratagemIcons/Orbital_Airburst_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital 120mm HE Barrage",
+        "sequence": [
+            "→",
+            "→",
+            "↓",
+            "←",
+            "→",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Orbital_120mm_HE_Barrage_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital 380mm HS Barrage",
+        "sequence": [
+            "→",
+            "↓",
+            "↑",
+            "↑",
+            "←",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Orbital_380mm_HE_Barrage_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Walking Barrage",
+        "sequence": [
+            "→",
+            "↓",
+            "→",
+            "↓",
+            "→",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Orbital_Walking_Barrage_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Laser",
+        "sequence": [
+            "→",
+            "↓",
+            "↑",
+            "→",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Orbital_Laser_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Rail Cannon Strike",
+        "sequence": [
+            "→",
+            "↑",
+            "↓",
+            "↓",
+            "→"
+        ],
+        "image": "../StratagemIcons/Orbital_Railcannon_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Precision Strike",
+        "sequence": [
+            "→",
+            "→",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Orbital_Precision_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Gas Strike",
+        "sequence": [
+            "→",
+            "→",
+            "↓",
+            "→"
+        ],
+        "image": "../StratagemIcons/Orbital_Gas_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital EMS Strike",
+        "sequence": [
+            "→",
+            "→",
+            "←",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Orbital_EMS_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Orbital Smoke Strike",
+        "sequence": [
+            "→",
+            "→",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Orbital_Smoke_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle Strafing Run",
+        "sequence": [
+            "↑",
+            "→",
+            "→"
+        ],
+        "image": "../StratagemIcons/Eagle_Strafing_Run_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle Airstrike",
+        "sequence": [
+            "↑",
+            "→",
+            "↓",
+            "→"
+        ],
+        "image": "../StratagemIcons/Eagle_Airstrike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle Cluster Bomb",
+        "sequence": [
+            "↑",
+            "→",
+            "↓",
+            "↓",
+            "→"
+        ],
+        "image": "../StratagemIcons/Eagle_Cluster_Bomb_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle Napalm",
+        "sequence": [
+            "↑",
+            "→",
+            "↓",
+            "↑"
+        ],
+        "image": "../StratagemIcons/Eagle_Napalm_Airstrike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle Smoke Strike",
+        "sequence": [
+            "↑",
+            "→",
+            "↑",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Eagle_Smoke_Strike_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle 110mm Rockets",
+        "sequence": [
+            "↑",
+            "→",
+            "↑",
+            "←"
+        ],
+        "image": "../StratagemIcons/Eagle_110mm_Rocket_Pods_Stratagem_Icon.png"
+    },
+    {
+        "name": "Eagle 500kg Bomb",
+        "sequence": [
+            "↑",
+            "→",
+            "↓",
+            "↓",
+            "↓"
+        ],
+        "image": "../StratagemIcons/Eagle_500kg_Bomb_Stratagem_Icon.png"
+    }
+]

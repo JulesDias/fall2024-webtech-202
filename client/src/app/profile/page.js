@@ -17,7 +17,6 @@ export default function Profile() {
     const [editingArticle, setEditingArticle] = useState(null);
     const router = useRouter();
 
-    // Récupère les articles de l'utilisateur connecté
     const fetchArticles = async () => {
         const { data, error } = await supabase
             .from("posts")
@@ -31,14 +30,12 @@ export default function Profile() {
         setArticles(data);
     };
 
-    // Charge les articles lors du chargement du composant
     useEffect(() => {
         if (user) {
             fetchArticles();
         }
     }, [user]);
 
-    // Si aucun utilisateur n'est connecté, rend un message d'erreur
     if (!user) {
         return (
             <div className="flex flex-col items-center justify-center h-screen text-gray-800 dark:text-gray-200">
@@ -55,9 +52,7 @@ export default function Profile() {
         setLoading(true);
 
         try {
-            let response;
             if (editingArticle) {
-                // Mise à jour de l'article existant
                 const { error } = await supabase
                     .from("posts")
                     .update({
@@ -66,13 +61,12 @@ export default function Profile() {
                         tags,
                         is_published: isPublished,
                     })
-                    .eq("id", editingArticle.id); // Mettre à jour l'article sélectionné
+                    .eq("id", editingArticle.id);
 
                 if (error) throw error;
 
                 alert("Article mis à jour avec succès!");
             } else {
-                // Création d'un nouvel article
                 const { error } = await supabase.from("posts").insert([{
                     title,
                     content,
@@ -86,18 +80,13 @@ export default function Profile() {
                 alert("Article créé avec succès!");
             }
 
-            // Réinitialisation de l'état du formulaire
             setShowCreateForm(false);
             setTitle("");
             setContent("");
             setTags("");
             setIsPublished(false);
-
-            // Recharge les articles après l'ajout ou la mise à jour
+            setEditingArticle(null);
             fetchArticles();
-
-            // Redirige l'utilisateur vers la page des articles
-            router.push("/articles");
         } catch (error) {
             console.error("Erreur lors de la création ou mise à jour de l'article:", error.message);
             alert("Erreur lors de l'enregistrement de l'article.");
@@ -106,13 +95,22 @@ export default function Profile() {
         }
     };
 
+    const handleCancel = () => {
+        setShowCreateForm(false);
+        setTitle("");
+        setContent("");
+        setTags("");
+        setIsPublished(false);
+        setEditingArticle(null);
+    };
+
     const handleEditPost = (article) => {
-        setEditingArticle(article); // Définit l'article en cours d'édition
+        setEditingArticle(article);
         setTitle(article.title);
         setContent(article.content);
         setTags(article.tags);
         setIsPublished(article.is_published);
-        setShowCreateForm(true); // Affiche le formulaire pour la modification
+        setShowCreateForm(true);
     };
 
     const handleDeletePost = async (articleId) => {
@@ -126,8 +124,8 @@ export default function Profile() {
 
                 if (error) throw error;
 
-                alert("Article succesfully deleted!");
-                fetchArticles(); // Recharge les articles après suppression
+                alert("Article successfully deleted!");
+                fetchArticles();
             } catch (error) {
                 console.error("Erreur lors de la suppression de l'article:", error.message);
                 alert("Erreur lors de la suppression de l'article.");
@@ -137,9 +135,13 @@ export default function Profile() {
         }
     };
 
+    const handleLogout = async () => {
+        await logout();
+        router.push("/");
+    };
+
     return (
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 w-96">
-            {/* Profile info, create post button, and form will now always render based on the state */}
+        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 w-full max-w-2xl mx-auto relative">
             <div className="flex justify-center mb-6">
                 <img
                     src={user.avatar_url}
@@ -148,76 +150,90 @@ export default function Profile() {
                 />
             </div>
 
-            <h2 className="text-xl font-semibold text-center">{user.name}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-1">{user.email}</p>
+            <h2 className="text-2xl font-semibold text-center mb-1">{user.name}</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">{user.email}</p>
 
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mb-6">
                 <button
                     onClick={() => setShowCreateForm(true)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
+                    className="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
                     Write an article
                 </button>
             </div>
 
+            {/* Modal for creating/editing article */}
             {showCreateForm && (
-                <form onSubmit={handleCreatePost} className="mt-6">
-                    <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Article title
-                        </label>
-                        <input
-                            id="title"
-                            type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            required
-                            className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                <>
+                    <div className="fixed inset-0 bg-black bg-opacity-50 z-10" />
+                    <div className="fixed inset-0 flex items-center justify-center z-20">
+                        <form onSubmit={handleCreatePost} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-96 space-y-4">
+                            <div>
+                                <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Article title
+                                </label>
+                                <input
+                                    id="title"
+                                    type="text"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    required
+                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                            </div>
+                            <div>
+                                <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Article content
+                                </label>
+                                <textarea
+                                    id="content"
+                                    value={content}
+                                    onChange={(e) => setContent(e.target.value)}
+                                    required
+                                    rows="6"
+                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                            </div>
+                            <div>
+                                <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Tags (separated with commas)
+                                </label>
+                                <input
+                                    id="tags"
+                                    type="text"
+                                    value={tags}
+                                    onChange={(e) => setTags(e.target.value)}
+                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Publish
+                                </label>
+                                <input
+                                    type="checkbox"
+                                    checked={isPublished}
+                                    onChange={(e) => setIsPublished(e.target.checked)}
+                                    className="mt-2"
+                                />
+                            </div>
+                            <div className="flex justify-between mt-4">
+                                <button
+                                    type="button"
+                                    onClick={handleCancel}
+                                    className="px-6 py-3 bg-gray-400 text-white rounded-lg shadow hover:bg-gray-500">
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={`px-6 py-3 ${loading ? "bg-gray-400" : "bg-indigo-600"} text-white rounded-lg shadow hover:bg-indigo-700`}
+                                    disabled={loading}>
+                                    {loading ? "Submitting..." : editingArticle ? "Update article" : "Publish article"}
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div>
-                        <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Article content
-                        </label>
-                        <textarea
-                            id="content"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            required
-                            rows="6"
-                            className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
-                    </div>
-                    <div>
-                        <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Tags (separated with commas)
-                        </label>
-                        <input
-                            id="tags"
-                            type="text"
-                            value={tags}
-                            onChange={(e) => setTags(e.target.value)}
-                            className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Publish
-                        </label>
-                        <input
-                            type="checkbox"
-                            checked={isPublished}
-                            onChange={(e) => setIsPublished(e.target.checked)}
-                            className="mt-2"
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className={`w-full py-3 ${loading ? "bg-gray-400" : "bg-indigo-600"} text-white font-bold rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 focus:outline-none transition duration-300 dark:bg-indigo-500 dark:hover:bg-indigo-600`}
-                        disabled={loading}>
-                        {loading ? "Subission..." : editingArticle ? "Update article" : "publish article"}
-                    </button>
-                </form>
+                </>
             )}
 
-            <div className="mt-6">
+            <div className="mt-8">
                 <h3 className="text-xl font-semibold text-center mb-4">Your Articles</h3>
                 {articles.length > 0 ? (
                     articles.map((article) => (
@@ -244,11 +260,10 @@ export default function Profile() {
                 )}
             </div>
 
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-8">
                 <button
-                    onClick={logout}
-                    className="px-4 py-2 bg-red-500 text-white rounded-md shadow hover:bg-red-600"
-                >
+                    onClick={handleLogout}
+                    className="px-6 py-3 bg-red-500 text-white rounded-md shadow hover:bg-red-600">
                     Disconnect
                 </button>
             </div>

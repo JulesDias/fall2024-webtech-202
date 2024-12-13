@@ -1,9 +1,32 @@
 "use client";
 
 import { useUser } from "../../components/UserContext";
+import emailjs from "emailjs-com";
 
 export default function Contacts() {
   const { user, login } = useUser();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // Envoie de l'email via EmailJS
+    emailjs.sendForm(
+      "service_z973i1p", // Ton service ID
+      "template_sw0icqv", // Ton template ID
+      e.target, // Les données du formulaire
+      "V1nebE-hihE-Gii2K" // Ta clé utilisateur EmailJS
+    )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Message envoyé !");
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Une erreur est survenue, veuillez réessayer.");
+        }
+      );
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen font-FS_Sinclair">
@@ -15,19 +38,14 @@ export default function Contacts() {
           <p className="text-lg text-gray-700 mb-6 font-roboto dark:text-gray-300 text-center">
             Hello {user.name}, we’d love to hear from you! Send us your questions, comments, or feedback.
           </p>
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Message sent!"); // Placeholder pour une future intégration backend.
-            }}
-          >
+          <form className="space-y-4" onSubmit={sendEmail}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Your Name
               </label>
               <input
                 id="name"
+                name="from_name" // Correspond à la variable 'from_name' dans le template
                 type="text"
                 placeholder="John Doe"
                 defaultValue={user.name}
@@ -41,6 +59,7 @@ export default function Contacts() {
               </label>
               <input
                 id="email"
+                name="from_email" // Correspond à la variable 'from_email' dans le template
                 type="email"
                 placeholder="example@example.com"
                 defaultValue={user.email}
@@ -54,6 +73,7 @@ export default function Contacts() {
               </label>
               <textarea
                 id="message"
+                name="message" // Correspond à la variable 'message' dans le template
                 placeholder="Write your message here..."
                 required
                 rows="4"

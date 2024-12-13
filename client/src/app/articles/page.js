@@ -25,14 +25,14 @@ export default function Articles() {
       </div>
 
       <div className="flex flex-col col-span-3 col-start-1 row-start-3 space-y-4" style={{"marginTop": "-5%", "marginLeft" : "10%", "marginRight": "-20%"}}>
-        <motion.p
+        <motion.h2
           className="text-sm text-justify md:text-lg font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
         >
           <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b>
-        </motion.p>
+        </motion.h2>
         <motion.p
           className="text-sm text-justify md:text-lg font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
@@ -80,7 +80,7 @@ export default function Articles() {
         <input
           type="text"
           placeholder="Search articles..."
-          className="w-2/3 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-FS_Sinclair"
+          className="w-2/3 px-4 py-2 border rounded-md font-FS_Sinclair focus:outline-none focus:ring focus:ring-blue-300"
         />
         
       </div>
@@ -88,15 +88,15 @@ export default function Articles() {
       <div className="items-center justify-end col-span-2 col-start-7 row-start-1 " style={{"marginTop" : "8%"}}>
       <Link 
           style={{"marginLeft" : "2%" ,  "marginRight" : "2%"}}
-          href="/test"
-          className="px-4 py-2 text-white transition bg-blue-600 rounded-md hover:bg-blue-700 dark:bg-blue-500"
+          href="/articles/browse"
+          className="px-4 py-2 text-white transition bg-blue-600 rounded-md  font-FS_Sinclair hover:bg-blue-700 dark:bg-blue-500"
         >
           Browse Articles
         </Link>
         <Link 
         style={{"marginLeft" : "2%" ,  "marginRight" : "2%"}}
           href="/test"
-          className="px-4 py-2 text-white transition bg-blue-600 rounded-md hover:bg-blue-700 dark:bg-blue-500"
+          className="px-4 py-2 text-white transition bg-blue-600 rounded-md font-FS_Sinclair hover:bg-blue-700 dark:bg-blue-500"
         >
           Suggested Post
         </Link>

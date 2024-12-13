@@ -3,51 +3,90 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 
+// Création du contexte
 const UserContext = createContext();
 
+// Composant Provider
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // Récupère l'utilisateur actuel
-    const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        const { user_metadata } = session.user;
-        // Si l'utilisateur est connecté via email, utilise la première partie de l'email comme nom
-        const name = user_metadata?.name || session.user.email.split("@")[0];
-        setUser({
-          ...session.user,
-          name: name,
-          avatar_url: user_metadata?.avatar_url || "/BasicImage.png", // Photo de profil ou image par défaut
-        });
-      } else {
-        setUser(null);
+  // Initialiser l'utilisateur avec la session actuelle
+  const initializeUser = (userSession) => {
+    const { email, id, user_metadata } = userSession;
+    const name = user_metadata?.name || email.split("@")[0];
+    const avatarUrl = user_metadata?.avatar_url || "/BasicImage.png";
+    setUser({ ...userSession, name, avatar_url: avatarUrl });
+  };
+
+  // Fonction pour vérifier et insérer l'utilisateur dans la base de données si nécessaire
+  const checkAndInsertUser = async (userSession) => {
+    const { email, id, user_metadata } = userSession;
+    const name = user_metadata?.name || email.split("@")[0];
+    const avatarUrl = user_metadata?.avatar_url || "/BasicImage.png";
+
+    // Vérification de l'existence de l'utilisateur dans la base de données
+    const { data, error } = await supabase
+      .from("my_users")
+      .select("*")
+      .eq("email", email)
+      .single();
+
+    if (error && error.code !== "PGRST116") {
+      console.error("Erreur lors de la recherche dans my_users :", error.message);
+      return;
+    }
+
+    // Si l'utilisateur n'existe pas, on l'ajoute
+    if (!data) {
+      const { error: insertError } = await supabase.from("my_users").insert([
+        {
+          id,
+          email,
+          avatar_url: avatarUrl,
+          created_at: new Date(),
+          name,
+        },
+      ]);
+      if (insertError) {
+        console.error("Erreur lors de l'ajout de l'utilisateur :", insertError.message);
       }
-    };
+    }
+  };
 
-    getUser();
+  // Fonction pour récupérer la session de l'utilisateur
+  const getUserSession = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user) {
+      initializeUser(session.user);
+      await checkAndInsertUser(session.user);
+    } else {
+      setUser(null);
+    }
+  };
 
-    // Écoute les changements de session
+  useEffect(() => {
+    // Récupérer la session initiale au montage
+    getUserSession();
+
+    // Souscrire aux changements de session d'authentification
     const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        const { user_metadata } = session.user;
-        const name = user_metadata?.name || session.user.email.split("@")[0];
-        setUser({
-          ...session.user,
-          name: name,
-          avatar_url: user_metadata?.avatar_url || "/BasicImage.png", // Photo de profil ou image par défaut
-        });
+        initializeUser(session.user);
+        checkAndInsertUser(session.user);
       } else {
         setUser(null);
       }
     });
 
+    // Nettoyage de la souscription lors du démontage du composant
     return () => {
-      subscription?.unsubscribe();
+      if (subscription?.unsubscribe) {
+        subscription.unsubscribe();
+      }
     };
-  }, []);
+  }, []); // Ce useEffect se lance une seule fois lors du montage du composant
 
+  // Fonction de connexion avec un fournisseur OAuth
   const login = async (provider) => {
     const { error } = await supabase.auth.signInWithOAuth({ provider });
     if (error) {
@@ -55,12 +94,13 @@ export function UserProvider({ children }) {
     }
   };
 
+  // Fonction de déconnexion
   const logout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("Erreur lors de la déconnexion :", error.message);
     }
-    setUser(null);
+    setUser(null); // On réinitialise l'état de l'utilisateur après déconnexion
   };
 
   return (
@@ -70,6 +110,7 @@ export function UserProvider({ children }) {
   );
 }
 
+// Hook pour utiliser le contexte de l'utilisateur
 export const useUser = () => {
   return useContext(UserContext);
 };

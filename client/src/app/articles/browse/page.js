@@ -1,13 +1,14 @@
-"use client";
-// pages/articles/index.js
-import ArticleGrid from "../../../components/ArticleGrid";
+'use client';
 
-export default function ArticlesPage() {
+import Articles from '../../../components/ArticleGrid'; 
+
+export default function BrowsePage() {
   return (
-    <div className="flex items-start justify-center min-h-screen px-16 py-16">
-      <div className="h-full ">
-        <ArticleGrid />
-      </div>
+    <div className="min-h-screen p-8 ">
+      <h1 className="mb-6 text-3xl font-bold text-center text-gray-800 dark:text-gray-200">
+        Browse Articles
+      </h1>
+      <Articles />
     </div>
   );
 }

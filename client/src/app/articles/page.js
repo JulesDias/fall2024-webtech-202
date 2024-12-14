@@ -26,7 +26,7 @@ export default function Articles() {
 
       <div className="flex flex-col col-span-3 col-start-1 row-start-3 space-y-4" style={{"marginTop": "-5%", "marginLeft" : "10%", "marginRight": "-20%"}}>
         <motion.h2
-          className="text-sm text-justify md:text-lg font-FS_Sinclair"
+          className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
@@ -34,7 +34,7 @@ export default function Articles() {
           <b>Welcome to the heart of Super Earth's Democratic Liberty Hub!</b>
         </motion.h2>
         <motion.p
-          className="text-sm text-justify md:text-lg font-FS_Sinclair"
+          className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
@@ -44,7 +44,7 @@ export default function Articles() {
           their exploits!
         </motion.p>
         <motion.p
-          className="text-sm text-justify md:text-lg font-FS_Sinclair"
+          className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
@@ -53,7 +53,7 @@ export default function Articles() {
           allow every super Citizen to relive every Helldiver's finest moments.
         </motion.p>
         <motion.p
-          className="text-sm text-justify md:text-lg font-FS_Sinclair"
+          className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
@@ -63,7 +63,7 @@ export default function Articles() {
           the best in our <b>SUGGESTED POSTS!</b>
         </motion.p>
         <motion.p
-          className="text-sm text-justify md:text-lg font-FS_Sinclair"
+          className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.25, delay: 1 }}
@@ -89,7 +89,7 @@ export default function Articles() {
       <Link 
           style={{"marginLeft" : "2%" ,  "marginRight" : "2%"}}
           href="/articles/browse"
-          className="px-4 py-2 text-white transition bg-blue-600 rounded-md  font-FS_Sinclair hover:bg-blue-700 dark:bg-blue-500"
+          className="px-4 py-2 text-white transition bg-blue-600 rounded-md font-FS_Sinclair hover:bg-blue-700 dark:bg-blue-500"
         >
           Browse Articles
         </Link>

@@ -99,7 +99,7 @@ export default function Article() {
         const { error } = await supabase.from('likes').insert({
           post_id: articleId,
           user_id: user.id,
-          liked_at: new Date().toISOString(),
+          created_at: new Date().toISOString(),
         });
 
         if (error) throw error;

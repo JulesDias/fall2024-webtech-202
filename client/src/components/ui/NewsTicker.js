@@ -20,18 +20,16 @@ export default function NewsTicker() {
   }, []);
 
   return (
-    <div className="text-black py-2 overflow-hidden whitespace-nowrap font-FS_Sinclair">
-      <span className="animate-marquee">
+    <div className="text-black py-2 overflow-hidden whitespace-nowrap font-FS_Sinclair relative">
+      <div className="animate-marquee flex">
         {error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : (
-          <div className="flex animate-marquee">
-            {[...news, ...news, ...news].map((message, index) => (  // triple le contenu pour l'illusion de continuité
-              <span key={index} className="mx-24">{message}</span> // Espace agrandi entre les messages
-            ))}
-          </div>
+          [...news, ...news].map((message, index) => (  // double le contenu pour l'illusion de continuité
+            <span key={index} className="mx-24">{message}</span> // Espace agrandi entre les messages
+          ))
         )}
-      </span>
+      </div>
     </div>
   );
 }

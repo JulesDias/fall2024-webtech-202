@@ -1,13 +1,50 @@
-// Articles page
-"use client";
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Globe3D from '../../components/Globe3D';
 import { motion } from 'framer-motion';
+import { supabase } from '../../lib/supabaseClient';
 
 export default function Articles() {
+  const [searchQuery, setSearchQuery] = useState(""); // État pour la recherche
+  const [articles, setArticles] = useState([]); // État pour stocker les résultats de recherche
+  const [loading, setLoading] = useState(false); // État pour gérer le chargement
+  const [error, setError] = useState(null); // État pour gérer les erreurs
 
+  // Fonction pour récupérer les titres des articles correspondant à la recherche
+  const fetchArticles = async (search) => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('posts')
+        .select('id, title') // On ne sélectionne que les titres
+        .ilike('title', `%${search}%`); // Filtrage par titre (insensible à la casse)
 
-  /*<div className="grid w-full h-full min-h-screen grid-cols-3 grid-rows-4 gap-4 p-4"> */
+      if (error) throw error;
+
+      setArticles(data || []);
+    } catch (err) {
+      setError('Failed to fetch articles.');
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Utiliser useEffect pour effectuer la recherche à chaque changement de searchQuery
+  useEffect(() => {
+    if (searchQuery) {
+      fetchArticles(searchQuery);
+    } else {
+      setArticles([]); // Réinitialiser si la recherche est vide
+    }
+  }, [searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div className="grid w-full h-full min-h-screen grid-cols-8 gap-4 p-4 overflow-hidden grid-rows-8 hide-scrollbar">
       {/* Title in the top-left corner */}
@@ -66,19 +103,40 @@ export default function Articles() {
         >
           Share your story. Strengthen the cause. Democracy needs <b>YOU!</b>
         </motion.p>
-
-
-
       </div>
 
       {/* Search bar at the top-right */}
-      <div className="flex items-center justify-end col-span-4 col-start-3 row-start-1 text-dark-900">
+      <div className="flex items-center justify-end col-span-4 col-start-3 row-start-1 text-gray-900 relative">
         <input
           type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
           placeholder="Search articles..."
-          className="w-2/3 px-4 py-2 border rounded-md font-FS_Sinclair focus:outline-none focus:ring focus:ring-yellow-300 "
+          className="w-2/3 px-4 py-2 border rounded-md font-FS_Sinclair focus:outline-none focus:ring focus:ring-yellow-300 text-gray-900"
         />
-
+        {/* Menu déroulant des résultats de recherche */}
+        {searchQuery && (
+          <div className="absolute w-2/3 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10 text-gray-900 font-FS_Sinclair" style={{ top: '100%' }}>
+            <ul>
+              {loading ? (
+                <li className="px-4 py-2 text-gray-900">Loading...</li>
+              ) : error ? (
+                <li className="px-4 py-2 text-red-500">{error}</li>
+              ) : (
+                articles.map((article) => (
+                  <li
+                    key={article.id}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                  >
+                    <Link href={`/articles/${article.id}`} className="block w-full">
+                      {article.title}
+                    </Link>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="items-center justify-end col-span-2 col-start-7 row-start-1 " style={{ "marginTop": "8%" }}>
@@ -97,8 +155,6 @@ export default function Articles() {
           Suggested Post
         </Link>
       </div>
-
-
 
       {/* Optional Globe3D element */}
       <div className="absolute w-[50vw] h-[50vh] overflow-hidden" style={{ left: '45%', top: '50%' }}>

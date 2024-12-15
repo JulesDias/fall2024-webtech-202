@@ -22,17 +22,20 @@ export default function Article() {
   const fetchArticleData = async () => {
     setLoading(true);
     try {
-      // Fetch article details
+      // Fetch article details with author's avatar
       const { data: articleData, error: articleError } = await supabase
         .from('posts')
-        .select('*, author:my_users(name)')
+        .select('*, author:my_users(name, avatar_url)')
         .eq('id', articleId)
         .single();
 
       if (articleError) throw articleError;
 
       setArticle(articleData);
-      setAuthor(articleData.author?.name || 'Unknown');
+      setAuthor({
+        name: articleData.author?.name || 'Unknown',
+        avatar_url: articleData.author?.avatar_url || '/BasicImage.png', // Default image
+      });
 
       // Fetch likes count
       const { count: likesCount, error: likesError } = await supabase
@@ -61,10 +64,10 @@ export default function Article() {
         setIsLiked(!!userLikes);
       }
 
-      // Fetch comments
+      // Fetch comments with user avatars
       const { data: commentsData, error: commentsError } = await supabase
         .from('comments')
-        .select('content, created_at, user:my_users(name)')
+        .select('content, created_at, user:my_users(name, avatar_url)')
         .eq('post_id', articleId)
         .order('created_at', { ascending: false });
 
@@ -159,7 +162,14 @@ export default function Article() {
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <h1 className={`text-3xl font-extrabold ${textColor} mb-6`}>{article.title}</h1>
         <p className={`${secondaryTextColor} text-lg leading-relaxed mb-4`}>{article.content}</p>
-        <p className={`${secondaryTextColor} text-sm mb-4`}>By: {author}</p>
+        <div className="flex items-center mb-4">
+          <img
+            src={author.avatar_url}
+            alt={`${author.name}'s profile`}
+            className="w-10 h-10 rounded-full mr-4"
+          />
+          <p className={`${secondaryTextColor} text-sm`}>By: {author.name}</p>
+        </div>
         <div className="flex items-center justify-between mb-4">
           <button
             className={`text-2xl ${isLiked ? 'text-red-500' : secondaryTextColor} ${!user ? 'cursor-not-allowed opacity-50' : ''
@@ -201,10 +211,17 @@ export default function Article() {
         <h2 className={`text-xl font-bold ${textColor} mb-4`}>Comments</h2>
         {comments.length > 0 ? (
           comments.map((comment, index) => (
-            <div key={index} className={`mb-4 ${borderColor} border-b pb-2`}>
-              <p className={`${textColor} font-medium`}>{comment.user?.name || 'Anonymous'}</p>
-              <p className={`${secondaryTextColor} text-sm`}>{comment.content}</p>
-              <p className={`${secondaryTextColor} text-xs`}>{new Date(comment.created_at).toLocaleString()}</p>
+            <div key={index} className={`mb-4 ${borderColor} border-b pb-2 flex items-start`}>
+              <img
+                src={comment.user?.avatar_url || '/BasicImage.png'}
+                alt={`${comment.user?.name || 'Anonymous'}'s profile`}
+                className="w-8 h-8 rounded-full mr-4"
+              />
+              <div>
+                <p className={`${textColor} font-medium`}>{comment.user?.name || 'Anonymous'}</p>
+                <p className={`${secondaryTextColor} text-sm`}>{comment.content}</p>
+                <p className={`${secondaryTextColor} text-xs`}>{new Date(comment.created_at).toLocaleString()}</p>
+              </div>
             </div>
           ))
         ) : (

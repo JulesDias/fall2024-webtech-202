@@ -154,15 +154,16 @@ export default function Article() {
   }
 
   return (
-    <div className="flex flex-col items-center h-screen pt-8 font-FS_Sinclair">
+    <div className="flex flex-col items-center w-full max-w-screen-lg mx-auto px-4 py-8 font-FS_Sinclair">
       {/* Article Zone */}
-      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-2/3 mb-8`}>
+      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <h1 className={`text-3xl font-extrabold ${textColor} mb-6`}>{article.title}</h1>
         <p className={`${secondaryTextColor} text-lg leading-relaxed mb-4`}>{article.content}</p>
         <p className={`${secondaryTextColor} text-sm mb-4`}>By: {author}</p>
         <div className="flex items-center justify-between mb-4">
           <button
-            className={`text-2xl ${isLiked ? 'text-red-500' : secondaryTextColor} ${!user ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`text-2xl ${isLiked ? 'text-red-500' : secondaryTextColor} ${!user ? 'cursor-not-allowed opacity-50' : ''
+              }`}
             onClick={user ? toggleLike : undefined}
             title={!user ? 'Log in to like posts' : ''}
           >
@@ -175,18 +176,20 @@ export default function Article() {
       </div>
 
       {/* Comment Zone */}
-      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-2/3 mb-8`}>
+      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <textarea
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
-          className={`w-full p-4 ${inputBackground} ${inputTextColor} ${borderColor} rounded-lg focus:outline-none focus:ring ${isDarkMode ? 'focus:ring-blue-700' : 'focus:ring-blue-300'}`}
+          className={`w-full p-4 ${inputBackground} ${inputTextColor} ${borderColor} rounded-lg focus:outline-none focus:ring ${isDarkMode ? 'focus:ring-blue-700' : 'focus:ring-blue-300'
+            }`}
           placeholder="Write a comment..."
           title={!user ? 'Log in to comment' : ''}
           disabled={!user}
         />
         <button
           onClick={handleCommentSubmit}
-          className={`px-4 py-2 mt-4 text-white rounded-lg ${commentText.trim() && user ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
+          className={`px-4 py-2 mt-4 text-white rounded-lg ${commentText.trim() && user ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+            }`}
           disabled={!commentText.trim() || !user}
         >
           Submit Comment
@@ -194,7 +197,7 @@ export default function Article() {
       </div>
 
       {/* Comments Section */}
-      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-2/3`}>
+      <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full`}>
         <h2 className={`text-xl font-bold ${textColor} mb-4`}>Comments</h2>
         {comments.length > 0 ? (
           comments.map((comment, index) => (

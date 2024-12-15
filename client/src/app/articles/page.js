@@ -57,7 +57,7 @@ export default function Articles() {
         >Democratic Dispatches</motion.h1>
       </div>
 
-      <div className="flex flex-col col-span-3 col-start-1 row-start-3 space-y-4" style={{ "marginTop": "-5%", "marginLeft": "10%", "marginRight": "-20%" }}>
+      <div className="flex flex-col col-span-3 col-start-1 row-start-3 space-y-4" style={{ "marginTop": "-20%", "marginLeft": "10%", "marginRight": "-20%" }}>
         <motion.h2
           className="text-xl text-justify font-FS_Sinclair"
           initial={{ y: -20, opacity: 0 }}
@@ -116,7 +116,7 @@ export default function Articles() {
         />
         {/* Menu déroulant des résultats de recherche */}
         {searchQuery && (
-          <div className="absolute w-2/3 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10 text-gray-900 font-FS_Sinclair" style={{ top: '100%' }}>
+          <div className="absolute w-2/3 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10 text-gray-900 font-FS_Sinclair" style={{ top: '58%' }}>
             <ul>
               {loading ? (
                 <li className="px-4 py-2 text-gray-900">Loading...</li>
@@ -139,9 +139,9 @@ export default function Articles() {
         )}
       </div>
 
-      <div className="items-center justify-end col-span-2 col-start-7 row-start-1 " style={{ "marginTop": "8%" }}>
+      <div className="flex items-center justify-end col-span-2 col-start-7 row-start-1 " >
         <Link
-          style={{ "marginLeft": "2%", "marginRight": "2%" }}
+          style={{ "marginLeft": "0%", "marginRight": "2%" }}
           href="/articles/browse"
           className="px-4 py-2 text-white transition bg-blue-600 rounded-md font-FS_Sinclair hover:bg-blue-700 dark:bg-blue-500"
         >

@@ -2,7 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import stratagems from "../../../public/hd2ApiData/Stratagem.json"; // Importer les stratagèmes depuis le fichier JSON
+import stratagems from "../../../public/hd2ApiData/Stratagem.json";
+import { TbArrowBigDown, TbArrowBigUp, TbArrowBigLeft, TbArrowBigRight } from "react-icons/tb";
+
+// Fonction pour mapper la valeur de la séquence avec les icônes correspondantes
+const arrowIconMap = {
+    "↑": <TbArrowBigUp className="text-5xl" />,
+    "↓": <TbArrowBigDown className="text-5xl" />,
+    "←": <TbArrowBigLeft className="text-5xl" />,
+    "→": <TbArrowBigRight className="text-5xl" />,
+};
 
 export default function Train() {
     const [currentStratagem, setCurrentStratagem] = useState(null);
@@ -41,7 +50,7 @@ export default function Train() {
             setTimeout(generateStratagem, 2000);
         } else if (playerInput.length === currentStratagem.sequence.length) {
             setFeedback("Failure! Try again.");
-            setPlayerInput([]); // Réinitialisation de la séquence en cas d'échec
+            setPlayerInput([]);
             clearInterval(timer);
             setTimeout(generateStratagem, 2000);
         }
@@ -55,15 +64,12 @@ export default function Train() {
             ArrowRight: "→",
         };
 
-        // Empêcher le défilement de la page si les flèches directionnelles sont pressées
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
             event.preventDefault();
         }
 
         if (keyMap[event.key]) {
-            const direction = keyMap[event.key];
-            const expected = currentStratagem.sequence[playerInput.length];
-            setPlayerInput((prev) => [...prev, direction]);
+            setPlayerInput((prev) => [...prev, keyMap[event.key]]);
         }
     };
 
@@ -79,7 +85,7 @@ export default function Train() {
             window.removeEventListener("keydown", handleKeyDown);
             if (timer) clearInterval(timer);
         };
-    }, [timer]);
+    }, []);
 
     const getArrowColor = (index) => {
         if (index < playerInput.length) {
@@ -87,7 +93,7 @@ export default function Train() {
             const expectedDirection = currentStratagem.sequence[index];
             return inputDirection === expectedDirection ? "text-green-500" : "text-red-500";
         }
-        return "text-gray-400"; // Couleur par défaut pour les flèches non encore entrées
+        return "text-gray-400";
     };
 
     return (
@@ -98,21 +104,21 @@ export default function Train() {
 
             {currentStratagem && (
                 <>
-                    <p className="text-3xl mb-8">
+                    <div className="text-3xl mb-8">
                         Execute the following sequence:
-                        <span className="font-bold text-gray-400 ml-4">
+                        <div className="flex justify-center items-center space-x-4 font-bold text-gray-400 ml-4">
                             {currentStratagem.sequence.map((arrow, index) => (
                                 <span
                                     key={index}
-                                    className={`arrow mx-4 text-5xl drop-shadow-lg ${getArrowColor(index)}`}
+                                    className={`arrow ${getArrowColor(index)}`}
                                 >
-                                    {arrow}
+                                    {arrowIconMap[arrow] || arrow}
                                 </span>
                             ))}
-                        </span>
-                    </p>
+                        </div>
+                    </div>
 
-                    {/* Affichage de l'image du stratagème */}
+
                     {currentStratagem.image && (
                         <img
                             src={currentStratagem.image}

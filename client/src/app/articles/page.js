@@ -12,7 +12,8 @@ export default function Articles() {
   const [loading, setLoading] = useState(false); // État pour gérer le chargement
   const [error, setError] = useState(null); // État pour gérer les erreurs
 
-  // Fonction pour récupérer les titres des articles correspondant à la recherche
+  {/*
+  // Version simple de la recherche (sensible à la casse)
   const fetchArticles = async (search) => {
     setLoading(true);
     try {
@@ -31,6 +32,31 @@ export default function Articles() {
       setLoading(false);
     }
   };
+  */}
+  //Supabase full text search version (more advanced but less efficient)
+
+  const fetchArticles = async (search) => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('posts') // Table ciblée
+        .select('id, title') // Colonnes sélectionnées
+        .textSearch('title', search, {
+          type: 'websearch', // Permet des recherches plus naturelles
+          config: 'english'  // Configure pour une langue spécifique
+        });
+
+      if (error) throw error;
+
+      setArticles(data || []);
+    } catch (err) {
+      setError('Failed to fetch articles.');
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   // Utiliser useEffect pour effectuer la recherche à chaque changement de searchQuery
   useEffect(() => {

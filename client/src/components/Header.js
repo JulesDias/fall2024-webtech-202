@@ -45,7 +45,6 @@ export default function Header() {
             <Link href="/train" className="px-4 py-2 text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white">
               Training
             </Link>
-
           </div>
 
           {/* Right Side: Dark Mode Toggle & Profile */}
@@ -70,8 +69,8 @@ export default function Header() {
 
                 {/* Dropdown Menu */}
                 {menuOpen && (
-                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg z-20 dark:bg-gray-700 dark:border-gray-600">
-                    <div className="block px-4 py-2 text-gray-700 dark:text-gray-300">
+                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg z-20 dark:bg-gray-700 dark:border-gray-600 max-w-xs">
+                    <div className="block px-4 py-2 text-gray-700 dark:text-gray-300 truncate">
                       {user.name} {/* Affiche le nom de l'utilisateur */}
                     </div>
                     <hr className="border-gray-300 dark:border-gray-600" />
@@ -91,7 +90,6 @@ export default function Header() {
                     </button>
                   </div>
                 )}
-
               </div>
             ) : (
               <>

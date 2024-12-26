@@ -141,7 +141,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 w-full max-w-2xl mx-auto relative font-FS_Sinclair">
+        <div className="mt-8 bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 w-full max-w-2xl mx-auto relative font-FS_Sinclair">
             <div className="flex justify-center mb-6">
                 <img
                     src={user.avatar_url}

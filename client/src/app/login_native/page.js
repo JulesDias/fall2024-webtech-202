@@ -5,22 +5,35 @@ import { EvervaultCard } from "../../components/ui/evervault-card"; // Composant
 import { supabase } from "../../lib/supabaseClient"; // Le client Supabase configuré
 import { IconBrandGithub, IconBrandDiscord } from "@tabler/icons-react";
 import { useRouter } from "next/navigation"; // Importer le hook useRouter
+import md5 from "blueimp-md5"; // Importer le hash MD5
 
+// Fonction pour générer l'URL Gravatar
+function getGravatarUrl(email, size = 200) {
+  const baseUrl = "https://www.gravatar.com/avatar/";
+  const emailHash = md5(email.trim().toLowerCase());
+  return `${baseUrl}${emailHash}?s=${size}&d=identicon`;
+}
 
 export default function LoginNativePage() {
   const [showPassword, setShowPassword] = useState(false); // Contrôle la visibilité du mot de passe
   const [formData, setFormData] = useState({ email: "", password: "" }); // Données du formulaire
+  const [gravatarUrl, setGravatarUrl] = useState(null); // URL Gravatar
   const [error, setError] = useState(null); // Gestion des erreurs
   const [loading, setLoading] = useState(false); // Indicateur de chargement
   const router = useRouter(); // Initialiser le router
 
-  // Gestion des changements dans le formulaire
+  // Met à jour les données du formulaire et l'URL Gravatar
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
+    if (name === "email") {
+      const gravatar = getGravatarUrl(value); // Génère l'URL Gravatar
+      setGravatarUrl(gravatar);
+    }
   };
 
   // Connexion avec email et mot de passe
@@ -30,7 +43,6 @@ export default function LoginNativePage() {
     setLoading(true);
 
     const { email, password } = formData;
-
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -75,7 +87,6 @@ export default function LoginNativePage() {
   };
 
   return (
-
     <div className="flex items-center justify-center min-auto rounded-3xl font-FS_Sinclair h-screen">
       {/* Composant visuel pour l'effet d'arrière-plan */}
       <EvervaultCard className="absolute inset-0 rounded-3xl z-auto" />
@@ -87,6 +98,18 @@ export default function LoginNativePage() {
             Login
           </h2>
 
+
+          {/* Affichage de l'avatar Gravatar */}
+          {formData.email && (
+            <div className="flex justify-center mb-4">
+              <img
+                src={gravatarUrl}
+                alt="Avatar Gravatar"
+                className="w-16 h-16 rounded-full"
+              />
+            </div>
+          )}
+
           {/* Champ d'email */}
           <input
             type="text"
@@ -97,6 +120,8 @@ export default function LoginNativePage() {
             required
             className="w-full px-4 py-2 border rounded-md bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-100 mb-4 font-FS_Sinclair"
           />
+
+
 
           {/* Champ de mot de passe */}
           <div className="relative mb-4">

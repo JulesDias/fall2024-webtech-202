@@ -5,7 +5,6 @@ import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 export const EvervaultCard = ({
-  text,
   className
 }) => {
   let mouseX = useMotionValue(0);
@@ -27,7 +26,7 @@ export const EvervaultCard = ({
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
 
-    const str = generateRandomString(18000);
+    const str = generateRandomString(30000);
     setRandomString(str);
   }
 
@@ -44,7 +43,7 @@ export const EvervaultCard = ({
         <div className="relative z-10 flex items-center justify-center">
           <div
             className="relative h-44 w-44  rounded-full flex items-center justify-center text-white font-bold text-4xl">
-            <div/>
+            <div />
           </div>
         </div>
       </div>

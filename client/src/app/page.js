@@ -89,12 +89,12 @@ export default function Home({ }) {
           </p>
 
           <div className="relative z-20 mt-12">
-            <Link href="/articles/">
+            <Link href="/speedRace">
               <button
                 role="button"
                 className="px-8 py-3 text-lg text-black bg-gray-200 rounded-full font-FS_Sinclair hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
               >
-                Explore the galaxy 💫
+                Ready for the Race ?
               </button>
             </Link>
           </div>

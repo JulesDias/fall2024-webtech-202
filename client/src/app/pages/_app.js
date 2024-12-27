@@ -1,5 +1,4 @@
-// src/pages/_app.js
-import { UserProvider } from '../components/UserContext'; // Assurez-vous que le chemin est correct
+import { UserProvider } from '../components/UserContext';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {

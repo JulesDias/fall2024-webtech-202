@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import { Label } from "./label";
 import { Input } from "./input";
 import { cn } from "../../lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandDiscord,
-} from "@tabler/icons-react";
+import { IconBrandGithub, IconBrandDiscord } from "@tabler/icons-react";
 import { supabase } from "../../lib/supabaseClient";
+import md5 from "md5"; // Utilisé pour générer l'URL Gravatar
 
 export function SignupFormDemo() {
   const [formData, setFormData] = useState({
@@ -30,6 +28,33 @@ export function SignupFormDemo() {
     }));
   };
 
+  const getGravatarUrl = (email) => {
+    const hash = md5(email.trim().toLowerCase());
+    return `https://www.gravatar.com/avatar/${hash}?d=404`; // Retourne 404 si Gravatar n'existe pas
+  };
+
+  const getProfilePicture = async (provider) => {
+    // Priorité 1 : Avatar de l'OAuth (GitHub/Discord)
+    if (provider === "github" || provider === "discord") {
+      const { user, error } = await supabase.auth.getUser();
+      if (user && user.user_metadata && user.user_metadata.avatar_url) {
+        return user.user_metadata.avatar_url;
+      }
+    }
+
+    // Priorité 2 : Avatar Gravatar
+    const gravatarUrl = getGravatarUrl(formData.email);
+    try {
+      const response = await fetch(gravatarUrl);
+      if (response.ok) return gravatarUrl; // Si Gravatar existe, retourne l'URL
+    } catch (err) {
+      console.log("No Gravatar found.");
+    }
+
+    // Priorité 3 : Avatar par défaut
+    return "/BasicImage.png"; // Une image par défaut dans le dossier public
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -41,6 +66,11 @@ export function SignupFormDemo() {
 
     try {
       setLoading(true);
+
+      // Obtenez l'avatar approprié
+      const profilePicture = await getProfilePicture();
+
+      // Inscrivez l'utilisateur avec l'avatar
       const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -48,6 +78,7 @@ export function SignupFormDemo() {
           data: {
             first_name: formData.firstname,
             last_name: formData.lastname,
+            avatar_url: profilePicture,
           },
         },
       });
@@ -65,6 +96,14 @@ export function SignupFormDemo() {
     try {
       const { error } = await supabase.auth.signInWithOAuth({ provider });
       if (error) throw error;
+
+      // Récupération de l'avatar après OAuth
+      const profilePicture = await getProfilePicture(provider);
+      // Mettez à jour la base de données de l'utilisateur
+      const { user, error: updateError } = await supabase.auth.updateUser({
+        data: { avatar_url: profilePicture },
+      });
+      if (updateError) throw updateError;
     } catch (err) {
       setError(`Login with ${provider} failed: ${err.message}`);
     }
@@ -172,6 +211,8 @@ export function SignupFormDemo() {
 
 const LabelInputContainer = ({ children, className }) => {
   return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>{children}</div>
+    <div className={cn("flex flex-col space-y-2 w-full", className)}>
+      {children}
+    </div>
   );
 };

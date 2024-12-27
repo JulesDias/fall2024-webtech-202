@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabaseClient';
 import Link from 'next/link';
 import { useDarkMode } from '../../../components/DarkmodeContext';
+import RichTextEditor from '../../../components/RichTextEditor'; // Import RichTextEditor
 
 export default function Article() {
   const { articleId } = useParams();
@@ -13,7 +14,7 @@ export default function Article() {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState('');
+  const [commentContent, setCommentContent] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
@@ -116,19 +117,19 @@ export default function Article() {
   };
 
   const handleCommentSubmit = async () => {
-    if (!commentText.trim() || !user) return;
+    if (!commentContent.trim() || !user) return;
 
     try {
       const { error } = await supabase.from('comments').insert({
         post_id: articleId,
         user_id: user.id,
-        content: commentText,
+        content: commentContent,
         created_at: new Date().toISOString(),
       });
 
       if (error) throw error;
 
-      setCommentText('');
+      setCommentContent('');
       fetchArticleData(); // Refresh comments
     } catch (err) {
       console.error('Error submitting comment:', err.message);
@@ -145,8 +146,6 @@ export default function Article() {
   const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-900';
   const borderColor = isDarkMode ? 'border-gray-700' : 'border-gray-200';
   const secondaryTextColor = isDarkMode ? 'text-gray-400' : 'text-gray-600';
-  const inputBackground = isDarkMode ? 'bg-gray-700' : 'bg-gray-100';
-  const inputTextColor = isDarkMode ? 'text-gray-200' : 'text-gray-900';
 
   if (loading) {
     return <p className="mt-8 text-center text-gray-500">Loading...</p>;
@@ -157,16 +156,16 @@ export default function Article() {
   }
 
   return (
-    <div className="flex flex-col items-center w-full max-w-screen-lg mx-auto px-4 py-8 font-FS_Sinclair">
+    <div className="flex flex-col items-center w-full max-w-screen-lg px-4 py-8 mx-auto font-FS_Sinclair">
       {/* Article Zone */}
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <h1 className={`text-3xl font-extrabold ${textColor} mb-6`}>{article.title}</h1>
-        <p className={`${secondaryTextColor} text-lg leading-relaxed mb-4`}>{article.content}</p>
+        <div dangerouslySetInnerHTML={{ __html: article.content }} className="prose dark:prose-invert"></div>
         <div className="flex items-center mb-4">
           <img
             src={author.avatar_url}
             alt={`${author.name}'s profile`}
-            className="w-10 h-10 rounded-full mr-4"
+            className="w-10 h-10 mr-4 rounded-full"
           />
           <p className={`${secondaryTextColor} text-sm`}>By: {author.name}</p>
         </div>
@@ -187,20 +186,12 @@ export default function Article() {
 
       {/* Comment Zone */}
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
-        <textarea
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
-          className={`w-full p-4 ${inputBackground} ${inputTextColor} ${borderColor} rounded-lg focus:outline-none focus:ring ${isDarkMode ? 'focus:ring-blue-700' : 'focus:ring-blue-300'
-            }`}
-          placeholder="Write a comment..."
-          title={!user ? 'Log in to comment' : ''}
-          disabled={!user}
-        />
+        <RichTextEditor content={commentContent} setContent={setCommentContent} />
         <button
           onClick={handleCommentSubmit}
-          className={`px-4 py-2 mt-4 text-white rounded-lg ${commentText.trim() && user ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+          className={`px-4 py-2 mt-4 text-white rounded-lg ${commentContent.trim() && user ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
             }`}
-          disabled={!commentText.trim() || !user}
+          disabled={!commentContent.trim() || !user}
         >
           Submit Comment
         </button>
@@ -215,11 +206,11 @@ export default function Article() {
               <img
                 src={comment.user?.avatar_url || '/BasicImage.png'}
                 alt={`${comment.user?.name || 'Anonymous'}'s profile`}
-                className="w-8 h-8 rounded-full mr-4"
+                className="w-8 h-8 mr-4 rounded-full"
               />
               <div>
                 <p className={`${textColor} font-medium`}>{comment.user?.name || 'Anonymous'}</p>
-                <p className={`${secondaryTextColor} text-sm`}>{comment.content}</p>
+                <div dangerouslySetInnerHTML={{ __html: comment.content }} className="prose dark:prose-invert"></div>
                 <p className={`${secondaryTextColor} text-xs`}>{new Date(comment.created_at).toLocaleString()}</p>
               </div>
             </div>

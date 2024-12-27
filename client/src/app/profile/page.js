@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "../../components/UserContext";
 import { supabase } from "../../lib/supabaseClient";
 import { useRouter } from 'next/navigation';
+import RichTextEditor from "../../components/RichTextEditor";
 
 export default function Profile() {
     const { user, logout } = useUser();
@@ -24,7 +25,7 @@ export default function Profile() {
             .eq("author_id", user.id);
 
         if (error) {
-            console.error("Erreur lors de la récupération des articles:", error.message);
+            console.error("Error fetching articles:", error.message);
             return;
         }
         setArticles(data);
@@ -40,7 +41,7 @@ export default function Profile() {
         return (
             <div className="flex flex-col items-center justify-center h-screen text-gray-800 dark:text-gray-200">
                 <h1 className="text-2xl font-semibold">No user connected</h1>
-                <p className="mt-2">Connect to access to your Profile</p>
+                <p className="mt-2">Connect to access your Profile</p>
             </div>
         );
     }
@@ -65,7 +66,7 @@ export default function Profile() {
 
                 if (error) throw error;
 
-                alert("Article mis à jour avec succès!");
+                alert("Article updated successfully!");
             } else {
                 const { error } = await supabase.from("posts").insert([{
                     title,
@@ -77,7 +78,7 @@ export default function Profile() {
 
                 if (error) throw error;
 
-                alert("Article créé avec succès!");
+                alert("Article created successfully!");
             }
 
             setShowCreateForm(false);
@@ -88,8 +89,8 @@ export default function Profile() {
             setEditingArticle(null);
             fetchArticles();
         } catch (error) {
-            console.error("Erreur lors de la création ou mise à jour de l'article:", error.message);
-            alert("Erreur lors de l'enregistrement de l'article.");
+            console.error("Error creating or updating the article:", error.message);
+            alert("Error saving the article.");
         } finally {
             setLoading(false);
         }
@@ -114,7 +115,7 @@ export default function Profile() {
     };
 
     const handleDeletePost = async (articleId) => {
-        if (confirm("Are you sure you want to delete this article ?")) {
+        if (confirm("Are you sure you want to delete this article?")) {
             setLoading(true);
             try {
                 const { error } = await supabase
@@ -127,8 +128,8 @@ export default function Profile() {
                 alert("Article successfully deleted!");
                 fetchArticles();
             } catch (error) {
-                console.error("Erreur lors de la suppression de l'article:", error.message);
-                alert("Erreur lors de la suppression de l'article.");
+                console.error("Error deleting the article:", error.message);
+                alert("Error deleting the article.");
             } finally {
                 setLoading(false);
             }
@@ -141,22 +142,22 @@ export default function Profile() {
     };
 
     return (
-        <div className="mt-8 bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 w-full max-w-2xl mx-auto relative font-FS_Sinclair">
+        <div className="relative w-full max-w-2xl p-8 mx-auto mt-8 bg-white rounded-lg shadow-md dark:bg-gray-800 font-FS_Sinclair">
             <div className="flex justify-center mb-6">
                 <img
                     src={user.avatar_url}
-                    alt="Photo de profil"
-                    className="w-24 h-24 rounded-full border-4 border-gray-300 dark:border-gray-700 object-cover"
+                    alt="Profile picture"
+                    className="object-cover w-24 h-24 border-4 border-gray-300 rounded-full dark:border-gray-700"
                 />
             </div>
 
-            <h2 className="text-2xl font-semibold text-center mb-1">{user.name}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">{user.email}</p>
+            <h2 className="mb-1 text-2xl font-semibold text-center">{user.name}</h2>
+            <p className="mb-6 text-sm text-center text-gray-600 dark:text-gray-400">{user.email}</p>
 
             <div className="flex justify-center mb-6">
                 <button
                     onClick={() => setShowCreateForm(true)}
-                    className="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
+                    className="px-6 py-3 text-white bg-blue-500 rounded-md shadow hover:bg-blue-600">
                     Write an article
                 </button>
             </div>
@@ -164,9 +165,9 @@ export default function Profile() {
             {/* Modal for creating/editing article */}
             {showCreateForm && (
                 <>
-                    <div className="fixed inset-0 bg-black bg-opacity-50 z-10" />
-                    <div className="fixed inset-0 flex items-center justify-center z-20">
-                        <form onSubmit={handleCreatePost} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-96 space-y-4">
+                    <div className="fixed inset-0 z-10 bg-black bg-opacity-50" />
+                    <div className="fixed inset-0 z-20 flex items-center justify-center">
+                        <form onSubmit={handleCreatePost} className="p-8 space-y-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 w-96">
                             <div>
                                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Article title
@@ -177,19 +178,14 @@ export default function Profile() {
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
                                     required
-                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                    className="block w-full p-3 mt-1 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
                             <div>
                                 <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Article content
                                 </label>
-                                <textarea
-                                    id="content"
-                                    value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    required
-                                    rows="6"
-                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                                {/* RichTextEditor replaces the textarea */}
+                                <RichTextEditor content={content} setContent={setContent} />
                             </div>
                             <div>
                                 <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -200,7 +196,7 @@ export default function Profile() {
                                     type="text"
                                     value={tags}
                                     onChange={(e) => setTags(e.target.value)}
-                                    className="mt-1 p-3 block w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    className="block w-full p-3 mt-1 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
                             </div>
                             <div className="mt-4">
@@ -218,7 +214,7 @@ export default function Profile() {
                                 <button
                                     type="button"
                                     onClick={handleCancel}
-                                    className="px-6 py-3 bg-gray-400 text-white rounded-lg shadow hover:bg-gray-500">
+                                    className="px-6 py-3 text-white bg-gray-400 rounded-lg shadow hover:bg-gray-500">
                                     Cancel
                                 </button>
                                 <button
@@ -234,12 +230,12 @@ export default function Profile() {
             )}
 
             <div className="mt-8">
-                <h3 className="text-xl font-semibold text-center mb-4">Your Articles</h3>
+                <h3 className="mb-4 text-xl font-semibold text-center">Your Articles</h3>
                 {articles.length > 0 ? (
                     articles.map((article) => (
-                        <div key={article.id} className="mb-4 p-4 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                        <div key={article.id} className="p-4 mb-4 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
                             <h4 className="text-lg font-semibold">{article.title}</h4>
-                            <div className="mt-2 flex justify-between">
+                            <div className="flex justify-between mt-2">
                                 <button
                                     onClick={() => handleEditPost(article)}
                                     className="text-blue-500 hover:text-blue-600"
@@ -263,7 +259,7 @@ export default function Profile() {
             <div className="flex justify-center mt-8">
                 <button
                     onClick={handleLogout}
-                    className="px-6 py-3 bg-red-500 text-white rounded-md shadow hover:bg-red-600">
+                    className="px-6 py-3 text-white bg-red-500 rounded-md shadow hover:bg-red-600">
                     Disconnect
                 </button>
             </div>

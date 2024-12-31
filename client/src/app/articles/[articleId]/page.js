@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabaseClient';
 import Link from 'next/link';
 import { useDarkMode } from '../../../components/DarkmodeContext';
-import RichTextEditor from '../../../components/RichTextEditor'; // Import RichTextEditor
+import RichTextEditor from '../../../components/RichTextEditor';
 
 export default function Article() {
   const { articleId } = useParams();
@@ -13,6 +13,8 @@ export default function Article() {
   const [author, setAuthor] = useState('');
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState('');
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState('');
   const [loading, setLoading] = useState(true);
@@ -23,10 +25,9 @@ export default function Article() {
   const fetchArticleData = async () => {
     setLoading(true);
     try {
-      // Fetch article details with author's avatar
       const { data: articleData, error: articleError } = await supabase
         .from('posts')
-        .select('*, author:my_users(name, avatar_url)')
+        .select('*, author:my_users(name, avatar_url, id)')
         .eq('id', articleId)
         .single();
 
@@ -35,10 +36,11 @@ export default function Article() {
       setArticle(articleData);
       setAuthor({
         name: articleData.author?.name || 'Unknown',
-        avatar_url: articleData.author?.avatar_url || '/BasicImage.png', // Default image
+        avatar_url: articleData.author?.avatar_url || '/BasicImage.png',
+        id: articleData.author?.id,
       });
+      setEditedContent(articleData.content);
 
-      // Fetch likes count
       const { count: likesCount, error: likesError } = await supabase
         .from('likes')
         .select('*', { count: 'exact' })
@@ -48,12 +50,10 @@ export default function Article() {
 
       setLikes(likesCount || 0);
 
-      // Fetch the logged-in user
       const { data: userData } = await supabase.auth.getUser();
       setUser(userData?.user || null);
 
       if (userData?.user) {
-        // Check if the user has liked the post
         const { data: userLikes, error: userLikesError } = await supabase
           .from('likes')
           .select('id')
@@ -61,11 +61,10 @@ export default function Article() {
           .eq('user_id', userData.user.id)
           .single();
 
-        if (userLikesError && userLikesError.code !== 'PGRST116') throw userLikesError; // Ignore "no rows found" error
+        if (userLikesError && userLikesError.code !== 'PGRST116') throw userLikesError;
         setIsLiked(!!userLikes);
       }
 
-      // Fetch comments with user avatars
       const { data: commentsData, error: commentsError } = await supabase
         .from('comments')
         .select('content, created_at, user:my_users(name, avatar_url)')
@@ -73,9 +72,10 @@ export default function Article() {
         .order('created_at', { ascending: false });
 
       if (commentsError) throw commentsError;
+
       setComments(commentsData || []);
     } catch (err) {
-      setError('Failed to fetch the article or likes.');
+      setError('Failed to fetch the article or comments.');
       console.error(err.message);
     } finally {
       setLoading(false);
@@ -87,7 +87,6 @@ export default function Article() {
 
     try {
       if (isLiked) {
-        // Remove like
         const { error } = await supabase
           .from('likes')
           .delete()
@@ -99,7 +98,6 @@ export default function Article() {
         setIsLiked(false);
         setLikes((prev) => prev - 1);
       } else {
-        // Add like with timestamp
         const { error } = await supabase.from('likes').insert({
           post_id: articleId,
           user_id: user.id,
@@ -113,6 +111,29 @@ export default function Article() {
       }
     } catch (err) {
       console.error('Error toggling like:', err.message);
+    }
+  };
+
+  const handleEditSubmit = async () => {
+    if (!editedContent.trim()) return;
+
+    setLoading(true);
+    try {
+      const { error } = await supabase
+        .from('posts')
+        .update({ content: editedContent })
+        .eq('id', articleId);
+
+      if (error) throw error;
+
+      setArticle((prev) => ({ ...prev, content: editedContent }));
+      setIsEditing(false);
+      alert('Article updated successfully!');
+    } catch (err) {
+      console.error('Error updating article:', err.message);
+      alert('Failed to update the article.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -155,12 +176,36 @@ export default function Article() {
     return <p className="mt-8 text-center text-red-500">{error}</p>;
   }
 
+  const isAuthor = user?.id === author.id;
+
   return (
     <div className="flex flex-col items-center w-full max-w-screen-lg px-4 py-8 mx-auto font-FS_Sinclair">
       {/* Article Zone */}
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <h1 className={`text-3xl font-extrabold ${textColor} mb-6`}>{article.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: article.content }} className="prose dark:prose-invert"></div>
+
+        {isEditing ? (
+          <>
+            <RichTextEditor content={editedContent} setContent={setEditedContent} />
+            <div className="flex gap-4 mt-4">
+              <button
+                onClick={handleEditSubmit}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Save Changes
+              </button>
+              <button
+                onClick={() => setIsEditing(false)}
+                className="px-4 py-2 text-white bg-gray-400 rounded-lg hover:bg-gray-500"
+              >
+                Cancel
+              </button>
+            </div>
+          </>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: article.content }} className="prose dark:prose-invert"></div>
+        )}
+
         <div className="flex items-center mb-4">
           <img
             src={author.avatar_url}
@@ -182,9 +227,18 @@ export default function Article() {
             Back to articles
           </Link>
         </div>
+
+        {isAuthor && !isEditing && (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="px-4 py-2 text-white bg-yellow-500 rounded-lg hover:bg-yellow-600"
+          >
+            Edit Article
+          </button>
+        )}
       </div>
 
-      {/* Comment Zone */}
+      {/* Comment Section */}
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full mb-8`}>
         <RichTextEditor content={commentContent} setContent={setCommentContent} />
         <button
@@ -197,7 +251,7 @@ export default function Article() {
         </button>
       </div>
 
-      {/* Comments Section */}
+      {/* Comments List */}
       <div className={`${cardBackground} ${borderColor} border rounded-xl shadow-2xl p-8 w-full`}>
         <h2 className={`text-xl font-bold ${textColor} mb-4`}>Comments</h2>
         {comments.length > 0 ? (

@@ -10,16 +10,16 @@
 
 ## Authors
 
-- *Jules DIAS, Cyber groupe 2*
-- *Arthur BERRET, Cyber groupe 2*
+- *[*Jules DIAS*](https://www.linkedin.com/in/jules-dias-2347bb24b/), Cyber groupe 2*
+- *[*Arthur BERRET*](https://www.linkedin.com/in/arthur-berret-b0aa411a5/), Cyber groupe 2*
 
 ## Evaluation
 
 ### Mandatory Tasks
 
 * **Naming convention**
-  * Grade: *How many points you think you deserve*
-  * Comments: *How did you implement the task*
+  * Grade: 1 points
+  * Comments: Nous avons nommé nos variables de maniere logique mais pas constante sur tout le projet. 
   * Task feedback: 
 * **Project structure**
   * Grade: 2 points
@@ -60,8 +60,8 @@
   * Task feedback: 
 * **Post modification and removal**
   * Grade: 4 points
-  * Comments: *How did you implement the task*
-  * Task feedback: *Facultative, how did you find the task (difficulty, pertinence...)*
+  * Comments: Un utilisateur connecté peut modifier ou supprimer un de ses articles en allant sur sa page de compte, mais également modifier un article sur lequel il se trouve s'il en est l'auteur.
+  * Task feedback:
 * **Search**
   * Grade: 6 points
   * Comments: *How did you implement the task*
@@ -72,7 +72,7 @@
   * Task feedback:
 * **Resource access control**
   * Grade: 6 points
-  * Comments: Nous avons correctement implémenté le RLS depuis supabase.
+  * Comments: Nous avons correctement implémenté le RLS depuis supabase. Un utilisateur ne peut supprimer et modifier que les publications dont il est l'auteur.
   * Task feedback: 
 * **Account settings**
   * Grade: 4 points
@@ -80,32 +80,40 @@
   * Task feedback: *Facultative, how did you find the task (difficulty, pertinence...)*
 * **WYSIWYG integration**
   * Grade: 2 points
-  * Comments: *How did you implement the task*
-  * Task feedback: *Facultative, how did you find the task (difficulty, pertinence...)*
+  * Comments: Nous avons implémentés du "WYSIWYG" via le Rich Text Editor de la librairie [Tiptap](https://tiptap.dev/), qui est utilisé lors de la modification des post mais aussi lors de la création des post et des commentaires.
+  * Task feedback: 
 * **Gravatar integration**
   * Grade: 2 points
   * Comments: *How did you implement the task*
   * Task feedback: *Facultative, how did you find the task (difficulty, pertinence...)*
 * **Light/dark mode**
   * Grade: 2 points
-  * Comments: *How did you implement the task*
-  * Task feedback: *Facultative, how did you find the task (difficulty, pertinence...)*
+  * Comments: Nous avons implémenté un mode sombre sur notre site en utilisant les context de React pour passer les informations dans l'ensemble du site
+  * Task feedback: 
 
 ### Bonus Tasks
 
-* ***Task title 1***   
-  * Grade: *How many points you think you deserve*
-  * Comments: *How did you implement the task*
-* ***Task title 2***   
-  * Grade: *How many points you think you deserve*
-  * Comments: *How did you implement the task*
+* **Likes on Posts**   
+  * Grade: 2 points
+  * Comments: Nous avons implémentés la possibliter de like/unlike une publication sur un modèle similaire aux commentaires
+* **Use of 3D with Three.js**   
+  * Grade: 4 points
+  * Comments: Nous avons implémentés un globe 3D modélisé à l'aide de la bibliothèque [Three.js](https://threejs.org/) , l'animant pour ressembler au [Github Globe](https://github.com/globe)
+* **Parallax Display**   
+  * Grade: 3 points
+  * Comments: Nous avons utilisé la bibliothèque [React-srping](https://www.react-spring.dev/) pour donner un effet de scroll fluide sur la page d'acceuil du site
+* **Training Minigame**
+  * Grade: 2 points
+  * Comments: Fidèlement au jeu Helldivers 2, nous avons implémenté un minijeu d'entraînement. Il consiste en une suite d'actions via les flèches directionnelles. Nous avons donc du implémenter la gestion du clavier et un timer pour voir en combien de temps la séquence a été éxécuté.
+* **Minijeu Vaisseau spatial**
+  * Grade: 2 points
+  * comments: Nous avons implémenté un mini-jeu basé depuis le site internet [spline](https://spline.design/) qui est accesible depuis la main page.
 
 ## Miscellaneous
 
 ### Course Feedback
 
-*Your feedback about the course, what you liked, what you disliked, what you missed...*
-
-### Project Reuse
+Un petit axe d'amélioration serail d'avoir tous les cours dès le début de l'année. Sinon globalement le cours est très interessant.
+### Project Reuse 
 
 - [x] We authorize the professors to use our project as an example for the next year students (facultative).
